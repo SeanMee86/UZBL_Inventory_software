@@ -14,15 +14,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="js/main.js"></script>
+
 </head>
 <body>
 <form>
-    <input type="text" name="username">
+    <input id="username" type="text" name="username">
     <br><br>
-    <input type="text" name="password">
+    <input id="password" type="text" name="password">
     <br><br>
-    <input id="login_submit" type="button">
+    <input id="login_submit" type="button" value="Login">
 </form>
+<div class="error_message"></div>
 
 </body>
 </html>
