@@ -11,13 +11,13 @@ $upc = mysqli_real_escape_string($conn,$inventory_information['upc']);
 $qty = mysqli_real_escape_string($conn, $inventory_information['qty']);
 
 //Query for updating the database inventory based on user info
-$update_sql = "UPDATE `inventory` SET `on_hand`=(SELECT `on_hand` WHERE `upc`=$upc)-$qty WHERE `upc`=$upc";
+$update_sql = "UPDATE `inventory` SET `quantity`=(SELECT `quantity` WHERE `upc`=$upc)-$qty WHERE `upc`=$upc";
 
 //Send query to the database
 $update_result = mysqli_query($conn, $update_sql);
 
 //Query for selecting updated inventory quantity
-$select_sql = "SELECT `on_hand`,`pending`,`name` FROM `inventory` WHERE `upc`=$upc";
+$select_sql = "SELECT `quantity`,`name` FROM `inventory` WHERE `upc`=$upc";
 
 //Send query to the database
 $select_result = mysqli_query($conn, $select_sql);
@@ -28,12 +28,11 @@ if($select_result) {
         $select_data[] = $select_row;
     }
     $item = $select_data[0]['name'];
-    $on_hand = $select_data[0]['on_hand'];
-    $pending = $select_data[0]['pending'];
+    $on_hand = $select_data[0]['quantity'];
     if($qty > $on_hand){
         echo 'not enough stock';
     }else {
-        echo 'inventory successfully updated, new On Hand for ' . $item . ' = ' . $on_hand . ($pending !== null ? ' pending orders = ' . $pending : ' no pending orders');
+        echo 'inventory successfully updated, new On Hand for ' . $item . ' = ' . $on_hand;
     }
 }else{
     echo 'inventory update failed: ' . mysqli_error($conn);

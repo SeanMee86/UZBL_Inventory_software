@@ -13,7 +13,7 @@
 <body>
 
 <form>
-    <input id="upc" type="text" name="upc">
+    <input id="upc" autofocus="autofocus" type="text" name="upc">
     <br><br>
     <input id="qty" type="text" name="qty">
     <br><br>
