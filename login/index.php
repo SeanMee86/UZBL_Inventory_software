@@ -21,12 +21,12 @@
 
 </head>
 <body>
-<form>
-    <input id="username" type="text" name="username">
+<form class="centerLogin">
+    <input id="username" class="inputLogin" type="text" name="username">
     <br><br>
-    <input id="password" type="text" name="password">
+    <input id="password" class="inputLogin" type="text" name="password">
     <br><br>
-    <input id="login_submit" type="button" value="Login">
+    <input id="login_submit" class="bluebuttonSubmit" type="button" value="Login">
 </form>
 <div class="error_message"></div>
 
