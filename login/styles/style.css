@@ -7,3 +7,39 @@
     text-align: center;
     color: white;
 }
+
+
+
+/* Blue button for Submit */
+.bluebuttonSubmit { 
+	background-color: #00c0ff;
+	border:none; 
+	border-radius: 7px; 
+	color: white; 
+	font-size:20px;
+
+	padding: 10px 57px; 
+
+}
+
+/* CENTERS LOGIN FORM */
+.centerLogin {
+	margin-left:auto;
+	margin-right:auto; 
+	margin-top:100px;
+	max-width:250px;
+
+	/* Box styling */
+	border-top: 4px solid #00c0ff; 
+	-webkit-box-shadow: 3px 2px 22px -6px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 2px 22px -6px rgba(0,0,0,0.75);
+	box-shadow: 3px 2px 22px -6px rgba(0,0,0,0.75);
+
+}
+/* Styling for input forms */
+	.inputLogin { 
+		border-radius: 7px; 
+		border: 1px solid #919191; 
+		padding: 11px 0px; 
+		text-indent:10px; 
+	}
