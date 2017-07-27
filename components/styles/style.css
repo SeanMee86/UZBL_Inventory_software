@@ -1,0 +1,27 @@
+body{
+    margin: 0;
+}
+.header {
+    height: 10vh;
+    background-color: #0c0653;
+    border-bottom: 2px solid turquoise;
+}
+.sidebar {
+    display: inline-block;
+    float: left;
+    background-color: #0c0653;
+    color: white;
+    width: 192px;
+    height: 90vh;
+    padding-top: 10%;
+}
+.log_out{
+    margin-top: 25px;
+}
+li {
+    list-style: none;
+    font-family: arial;
+}
+ul{
+    padding-left: 5%;
+}
