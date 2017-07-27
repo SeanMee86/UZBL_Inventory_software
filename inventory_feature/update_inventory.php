@@ -16,7 +16,7 @@ $update_sql = "UPDATE `inventory` SET `quantity`=(SELECT `quantity` WHERE `upc`=
 $update_result = mysqli_query($conn, $update_sql);
 
 //Query for selecting updated inventory quantity
-$select_sql = "SELECT `quantity`,`name` FROM `inventory` WHERE `upc`=$upc";
+$select_sql = "SELECT `quantity`,`name`,`device_model`,`color` FROM `inventory` WHERE `upc`=$upc";
 
 //Send query to the database
 $select_result = mysqli_query($conn, $select_sql);
@@ -28,10 +28,12 @@ if($select_result) {
     }
     $item = $select_data[0]['name'];
     $on_hand = $select_data[0]['quantity'];
+    $device = $select_data[0]['device_model'];
+    $color = $select_data[0]['color'];
     if($qty > $on_hand){
         echo 'not enough stock';
     }else {
-        echo 'inventory successfully updated, new On Hand for ' . $item . ' = ' . $on_hand;
+        echo 'inventory successfully updated, new On Hand for the '. $item . ' for ' . $device .' ('.$color.')'.  ' = ' . $on_hand;
     }
 }else{
     echo 'inventory update failed: ' . mysqli_error($conn);
