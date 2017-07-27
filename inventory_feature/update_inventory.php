@@ -2,7 +2,6 @@
 //Require our connection to the database
 require 'mysql_conf.php';
 
-
 //Get information from the user and decode it from json format
 $inventory_information = json_decode(file_get_contents('php://input'), true);
 

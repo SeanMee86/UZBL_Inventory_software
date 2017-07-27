@@ -1,0 +1,9 @@
+.error_text {
+    background-color: red;
+    padding: 8px;
+    width: 23vw;
+    font-family: arial;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+}
