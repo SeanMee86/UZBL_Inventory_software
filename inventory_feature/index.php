@@ -2,21 +2,8 @@
 session_start();
 if(isset($_SESSION['user_info'])){
     if($_SESSION['privileges']['admin'] || $_SESSION['privileges']['shipping']) {
+        include'../components/header/header.php'
         ?>
-
-        <!doctype html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport"
-                  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Document</title>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
-            <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-            <script src="js/main.js"></script>
-        </head>
-        <body>
 
         <form>
             <input id="upc" autofocus="autofocus" type="text" name="upc">
@@ -28,9 +15,8 @@ if(isset($_SESSION['user_info'])){
         </form>
         <div id="form_response"></div>
 
-        </body>
-        </html>
         <?php
+        include'../components/footer/footer.php';
     }else {
         echo "Permission Denied";
     }
