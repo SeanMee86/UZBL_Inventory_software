@@ -9,8 +9,18 @@ $inventory_information = json_decode(file_get_contents('php://input'), true);
 $upc = mysqli_real_escape_string($conn,$inventory_information['upc']);
 $qty = mysqli_real_escape_string($conn, $inventory_information['qty']);
 
+$select_qty_sql = "SELECT `quantity` FROM `inventory` WHERE `upc`=$upc";
+
+$select_qty_result = mysqli_query($conn, $select_qty_sql);
+
+$select_qty_row = mysqli_fetch_assoc($select_qty_result);
+
+$qty_on_hand = $select_qty_row['quantity'];
+
 //Query for updating the database inventory based on user info
-$update_sql = "UPDATE `inventory` SET `quantity`=(SELECT `quantity` WHERE `upc`=$upc)-$qty WHERE `upc`=$upc";
+//$update_sql = "UPDATE `inventory` SET `quantity`=(SELECT `quantity` WHERE `upc`=$upc)-$qty WHERE `upc`=$upc";
+
+$update_sql = "UPDATE `inventory` SET `quantity`=$qty_on_hand-$qty WHERE `upc`=$upc";
 
 //Send query to the database
 $update_result = mysqli_query($conn, $update_sql);
