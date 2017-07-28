@@ -11,7 +11,7 @@ $(document).ready(function(){
 function ship_inventory(){
     let upc = $('#upc').val();
     let qty = $('#qty').val();
-    axios_call(upc, qty);
+    inventory_update(upc, qty);
 }
 
 /**
@@ -20,7 +20,7 @@ function ship_inventory(){
 function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
-    axios_call(upc, qty);
+    inventory_update(upc, qty);
 }
 
 /**
@@ -28,7 +28,7 @@ function receive_inventory(){
  * @param upc
  * @param qty
  */
-function axios_call(upc, qty){
+function inventory_update(upc, qty){
     axios.post('update_inventory.php', {upc, qty}).then(resp=>{
         if($('#response_message')){
             $('#response_message').remove();
