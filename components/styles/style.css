@@ -1,33 +1,7 @@
 body{
     margin: 0;
 }
-.header {
-    height: 10vh;
-    position: fixed;
-    width: 100vw;
-    background-color: #0c0653;
-    border-bottom: 2px solid turquoise;
-}
-.inventory_container{
-    padding-top: 12vh;
-    padding-left: 220px;
-}
-.search_button{
-    margin-left: 10px;
-}
-.sidebar {
-    display: inline-block;
-    position: fixed;
-    float: left;
-    background-color: #0c0653;
-    color: white;
-    width: 192px;
-    height: 100vh;
-    padding-top: 10vh;
-}
-.log_out{
-    margin-top: 25px;
-}
+
 li {
     list-style: none;
     font-family: arial;
@@ -36,10 +10,48 @@ ul{
     padding-left: 5%;
 }
 
-/* Inventory Pages */ 
+a { 
+    text-decoration:none; 
+} 
 
+/* Global Navigation Styling */ 
+    /* Top Navbar */ 
+    .header {
+        height: 50px;
+        position: fixed;
+        width: 100vw;
+        background-color: #0c1c29;
+        border-bottom: 2px solid #00c0ff;
+        z-index: 9999;
+    }
+
+    .log_out{
+        margin-top: 5px;
+        margin-left:30px;
+    }
+
+    /* sidebar navigation */ 
+    .sidebar {
+        display: inline-block;
+        position: fixed;
+        float: left;
+        background-color: #1e2126;
+        color: white;
+        width: 192px;
+        height: 100vh;
+        padding-top: 10vh;
+    }
+
+/* Inventory Pages */ 
     /* INVENTORY SEARCH RESULTS STYLES */
+
+    .search_button{
+        margin-left: 10px;
+    }
+
     .inventory_container { 
+        padding-top: 12vh;
+        padding-left: 220px;
         max-width:55vw;
     }
 
@@ -49,4 +61,13 @@ ul{
 
     .item_description { 
         font-size: 13px;
+        color: #575757;
+    }
+
+    .item_price { 
+        color: #909090;
+    }
+
+    .item_quantity { 
+        color: #909090;
     }
