@@ -3,17 +3,24 @@ body{
 }
 .header {
     height: 10vh;
+    position: fixed;
+    width: 100vw;
     background-color: #0c0653;
     border-bottom: 2px solid turquoise;
 }
+.inventory_container{
+    padding-top: 10vh;
+    padding-left: 192px;
+}
 .sidebar {
     display: inline-block;
+    position: fixed;
     float: left;
     background-color: #0c0653;
     color: white;
     width: 192px;
-    height: 90vh;
-    padding-top: 10%;
+    height: 100vh;
+    padding-top: 10vh;
 }
 .log_out{
     margin-top: 25px;

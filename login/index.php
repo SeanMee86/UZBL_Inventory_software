@@ -22,10 +22,10 @@
 </head>
 <body>
 <form class="centerLogin">
-    <img id="loginLogo" src="img/loginlogo-min.png" /> 
-    <input id="username" class="inputLogin" type="text" name="username">
+    <img id="loginLogo" src="img/loginlogo-min.png" />
+    <input id="username" class="inputLogin" type="text" name="username" placeholder="Enter Username">
     <br><br>
-    <input id="password" class="inputLogin" type="text" name="password">
+    <input id="password" class="inputLogin" type="password" name="password" placeholder="Enter Password">
     <br><br>
     <input id="login_submit" class="bluebuttonSubmit" type="button" value="Login">
 </form>
