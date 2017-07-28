@@ -21,7 +21,7 @@ if(isset($_SESSION['user_info'])){
         if($i === 0) {
             $sql .= "'%" . $search_terms[$i] . "%'";
         }else{
-            $sql .= " '%" . $search_terms[$i] . "%'";
+            $sql .= " AND `tags` LIKE '%" . $search_terms[$i] . "%'";
         }
     }
 
@@ -33,10 +33,13 @@ if(isset($_SESSION['user_info'])){
 
         foreach ($data as $key => $value) {
             $description = substr($value['description'], 0, 200);
+            echo '<div class="item_block">';
             echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
-            echo '<div class="item_description">' . $description . '...</div>';
             echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
+            echo '<div class="item_thumbnail">Pic Goes Here</div>';
+            echo '<div class="item_description">' . $description . '...</div>';
             echo '<div class="item_quantity">Qty: ' . $value['quantity'] . '</div>';
+            echo '</div>';
             echo '<br>';
         }
     }
