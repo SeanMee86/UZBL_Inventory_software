@@ -37,6 +37,8 @@
 	text-align:center;
 	padding: 40px 0px;
 
+	background-color: white;
+
 	/* Box styling */
 	border-top: 4px solid #00c0ff; 
 	-webkit-box-shadow: 3px 2px 22px -6px rgba(0,0,0,0.75);
@@ -51,3 +53,22 @@
 		padding: 11px 0px; 
 		text-indent:10px; 
 	}
+
+	/* Prevents ugly blue selection bubble */
+	.inputLogin:focus {outline:0;}
+	.bluebuttonSubmit:focus {outline:0;}
+
+	#loginLogo {
+		width:155px;
+		height:auto;
+		padding-bottom: 20px;
+	}
+
+/* full page BG */
+html { 
+  background: url(../img/loginbg-min.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

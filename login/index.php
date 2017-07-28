@@ -22,6 +22,7 @@
 </head>
 <body>
 <form class="centerLogin">
+    <img id="loginLogo" src="img/loginlogo-min.png" /> 
     <input id="username" class="inputLogin" type="text" name="username">
     <br><br>
     <input id="password" class="inputLogin" type="text" name="password">
