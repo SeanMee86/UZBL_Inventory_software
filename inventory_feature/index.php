@@ -3,7 +3,14 @@ session_start();
 require"mysql_conf.php";
 if(isset($_SESSION['user_info'])){
         include '../components/header/header.php';
-        include '../components/sidebar/sidebar.php';
+        include '../components/sidebar/sidebar.php'; ?>
+        <div class="row">
+            <input id="inventory_search" class="form-control col-4" type="text" placeholder="Enter Search Term">
+            <input class="btn btn-outline-success search_button" type="submit">
+        </div>
+        <br>
+
+        <?php
 
         $sql = "SELECT `name`, `description`, `device_model`, `retail_price`, `quantity` FROM `inventory`";
 
@@ -13,10 +20,10 @@ if(isset($_SESSION['user_info'])){
             $data[] = $row;
         }
         foreach($data as $key => $value){
-            echo '<div>' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
-            echo '<div>' . $value['description'] . '</div>';
-            echo '<div>Price: ' . $value['retail_price'] . '</div>';
-            echo '<div>Qty: ' . $value['quantity'] . '</div>';
+            echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
+            echo '<div class="item_description">' . $value['description'] . '</div>';
+            echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
+            echo '<div class="item_quantity">Qty: ' . $value['quantity'] . '</div>';
             echo '<br>';
         }
         include '../components/footer/footer.php';

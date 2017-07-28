@@ -47,17 +47,5 @@ function axios_call(upc, qty){
 function apply_click_handler(){
     $('#inventory_shipped').click(ship_inventory);
     $('#inventory_received').click(receive_inventory);
-    // $('#inventory_sidemenu').click(inventoryDropDown);
 }
-
-// function inventoryDropDown(){
-//     var dropDownList = "<ul>" +
-//                         "<li>History</li>" +
-//                         "<li>Updater</li>" +
-//                         "<li>New Product</li>" +
-//                         "</ul>";
-//     // var dropDownContainer = "<ul></ul>";
-//     // $(dropDownContainer).append(dropDownList);
-//     $('#inventory_sidemenu').append(dropDownList);
-// }
 
