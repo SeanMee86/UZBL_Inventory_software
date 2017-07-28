@@ -14,7 +14,7 @@ function user_login(){
         }else{
             var error = $('<div>',{
                 'class': 'error_text',
-                'text': 'username/password invalid'
+                'text': 'username / password invalid'
             });
 
             $('.error_message').append(error);
