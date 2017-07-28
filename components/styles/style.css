@@ -35,3 +35,18 @@ li {
 ul{
     padding-left: 5%;
 }
+
+/* Inventory Pages */ 
+
+    /* INVENTORY SEARCH RESULTS STYLES */
+    .inventory_container { 
+        max-width:55vw;
+    }
+
+    .item_name { 
+        font-size: 18px;
+    }
+
+    .item_description { 
+        font-size: 13px;
+    }
