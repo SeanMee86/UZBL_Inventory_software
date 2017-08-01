@@ -18,3 +18,4 @@
     </ul>
 </div>
 <div class="inventory_container">
+<div class="product_display"></div>

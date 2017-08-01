@@ -1,6 +1,6 @@
 <?php
 session_start();
-require"mysql_conf.php";
+require "mysql_conf.php";
 if(isset($_SESSION['user_info'])){
     include '../components/header/header.php';
     include '../components/sidebar/sidebar.php'; ?>
@@ -23,6 +23,7 @@ if(isset($_SESSION['user_info'])){
     foreach ($data as $key => $value) {
         if(!$value['parent_item']) {
             $description = substr($value['description'], 0, 200);
+            echo '<div class="main_item_container">';
             echo '<div class="item_block" upc="'.$value['upc'].'">';
             echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
             echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
@@ -33,6 +34,7 @@ if(isset($_SESSION['user_info'])){
             }
             echo '<div class="item_description">' . $description . '...</div>';
             echo '<div class="item_quantity">Qty: ' . $value['quantity'] . '</div>';
+            echo '</div>';
             echo '<div class="child_container"></div>';
             echo '</div>';
             echo '<br>';

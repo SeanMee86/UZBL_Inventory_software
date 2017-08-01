@@ -12,7 +12,7 @@ require "mysql_conf.php";
 if(isset($_SESSION['user_info'])){
     $product_information = json_decode(file_get_contents('php://input'), true);
     $upc = $product_information['upc'];
-    $sql = "SELECT `color`, `upc`, `quantity`, `sku`, `thumbnail_location` FROM `inventory` WHERE `parent_item`=$upc OR `upc`=$upc";
+    $sql = "SELECT `color`, `upc`, `quantity`, `sku`, `front_img_location` FROM `inventory` WHERE `upc`=$upc";
     $result = mysqli_query($conn, $sql);
     while($row = mysqli_fetch_assoc($result)){
         $data[]=$row;
