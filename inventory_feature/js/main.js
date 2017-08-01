@@ -72,13 +72,20 @@ function getChildProducts(){
  */
 function displayProduct(){
     $('.product_display').children().remove();
-    console.log('child clicked on with upc: ' + $(this).attr('upc'));
     var upc = $(this).attr('upc');
     axios.post('retrieve_product_for_display.php', {upc}).then(resp => {
-        console.log('our response from axios: ', resp);
-        var products = resp.data;
-        var image = '<img src="images/' + products[0].front_img_location + '" width="400px">';
-        $('.product_display').append(image);
+        var products = resp.data[0];
+        var title = '<div class="product_display_header">'+products.name+' for '+products.device_model+'('+products.color+')</div>';
+        var image = '<img class="product_display_front" src="images/' + products.front_img_location + '">' +
+            '<img class="product_display_back" src="images/'+products.back_img_location+'">' +
+            '<img class="product_display_side" src="images/'+products.side_img_location+'">';
+        var description = '<div class="product_display_description_header">Description</div>' +
+                '<div class="product_display_description_body">'+products.description+'</div>';
+        var product_upc = '<div class="product_display_upc">UPC: '+products.upc+'</div>';
+        var sku = '<div class="product_display_sku">SKU: '+products.sku+'</div>';
+        var quantity = '<div class="product_display_quantity">On Hand: '+products.quantity+'</div>';
+        var retail_price = '<div class="product_display_msrp">MSRP $'+products.retail_price+'</div>';
+        $('.product_display').append(title, image, description, product_upc, sku, quantity, retail_price);
     })
 
 }

@@ -73,6 +73,7 @@ a {
         color: #909090;
     }
 
+    /* INVENTORY PRODUCT DISPLAY STYLES */
     .product_display {
         border: 1px solid black;
         height: 87vh;
@@ -80,4 +81,21 @@ a {
         width: 42vw;
         right: 10px;
         top: 64px;
+    }
+
+    img.product_display_front {
+        width: 65%;
+    }
+
+    img.product_display_back {
+        width: 30%;
+        position: absolute;
+        top: 7%;
+        right: 3%;
+    }
+
+    img.product_display_side {
+        width: 30%;
+        position: absolute;
+        top: 23%;
     }
