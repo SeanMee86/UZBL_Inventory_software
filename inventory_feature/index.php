@@ -20,6 +20,14 @@ if(isset($_SESSION['user_info'])){
         $data[] = $row;
     }
 
+    $total_qty_sql = "SELECT SUM(`quantity`), `name`, `device_model` FROM `inventory` GROUP BY `device_model`, `name`";
+
+    $total_qty_result = mysqli_query($conn, $total_qty_sql);
+
+    while($total_qty_row = mysqli_fetch_assoc($total_qty_result)){
+        $total_qty_data[] = $total_qty_row;
+    }
+
     foreach ($data as $key => $value) {
         if(!$value['parent_item']) {
             $description = substr($value['description'], 0, 200);
@@ -33,7 +41,11 @@ if(isset($_SESSION['user_info'])){
                 echo '<div class="item_thumbnail">Image goes here</div>';
             }
             echo '<div class="item_description">' . $description . '...</div>';
-            echo '<div class="item_quantity">Qty: ' . $value['quantity'] . '</div>';
+            for($i=0; $i<count($total_qty_data); $i++){
+                if($total_qty_data[$i]['device_model']===$value['device_model'] && $total_qty_data[$i]['name']===$value['name']){
+                    echo '<div class="item_quantity">Qty: ' . $total_qty_data[$i]['SUM(`quantity`)'] . '</div>';;
+                }
+            }
             echo '</div>';
             echo '<div class="child_container"></div>';
             echo '</div>';
