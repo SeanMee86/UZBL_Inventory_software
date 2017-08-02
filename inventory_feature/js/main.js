@@ -85,7 +85,33 @@ function displayProduct(){
         var sku = '<div class="product_display_sku">SKU: '+products.sku+'</div>';
         var quantity = '<div class="product_display_quantity">On Hand: '+products.quantity+'</div>';
         var retail_price = '<div class="product_display_msrp">MSRP $'+products.retail_price+'</div>';
-        $('.product_display').append(title, image, description, product_upc, sku, quantity, retail_price);
+        var wholesale_table = '<div class="product_display_wholesale">' +
+                '<table style="width: 100%">' +
+                    '<tr>' +
+                        '<th>QTY:</th>' +
+                        '<th>1-50</th>' +
+                        '<th>51-200</th>' +
+                        '<th>201-349</th>' +
+                        '<th>350-499</th>' +
+                        '<th>500-999</th>' +
+                        '<th>1000-2999</th>' +
+                        '<th>3000-4999</th>' +
+                        '<th>5000+</th>' +
+                    '</tr>' +
+                    '<tr>' +
+                        '<td></td>' +
+                        '<td>$'+products["tier1_1-50"]+'</td>' +
+                        '<td>$'+products["tier2_51-200"]+'</td>' +
+                        '<td>$'+products["tier3_201-349"]+'</td>' +
+                        '<td>$'+products["tier4_350-499"]+'</td>' +
+                        '<td>$'+products["tier5_500-999"]+'</td>' +
+                        '<td>$'+products["tier6_1000-2999"]+'</td>' +
+                        '<td>$'+products["tier7_3000-4999"]+'</td>' +
+                        '<td>$'+products["tier8_5000"]+'</td>' +
+                    '</tr>'+
+            '</table>'+
+            '</div>';
+        $('.product_display').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
     })
 
 }
