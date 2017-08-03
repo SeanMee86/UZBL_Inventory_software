@@ -50,7 +50,8 @@ if(isset($_SESSION['user_info'])){
                     echo '<div class="item_thumbnail">Image goes here</div>';
                 }
                 echo '<div class="item_description">' . $description . '...</div>';
-                for($i=0; $i<count($total_qty_data); $i++){
+                $count = count($total_qty_data);
+                for($i=0; $i<$count; $i++){
                     if($total_qty_data[$i]['device_model']===$value['device_model'] && $total_qty_data[$i]['name']===$value['name']){
                         echo '<div class="item_quantity">Qty: ' . $total_qty_data[$i]['SUM(`quantity`)'] . '</div>';;
                     }

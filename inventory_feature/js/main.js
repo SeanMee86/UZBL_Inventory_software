@@ -33,7 +33,6 @@ function inventory_update(upc, qty){
         if($('#response_message')){
             $('#response_message').remove();
         }
-        console.log(resp);
         let response_message = '<div id="response_message">'+resp['data']+'</div>'
         $('#form_response').append(response_message);
     });
@@ -64,6 +63,7 @@ function getChildProducts(){
         })
     }else{
         child_container.children().remove();
+        $('.product_display').children().remove();
     }
 }
 
@@ -113,7 +113,6 @@ function displayProduct(){
             '</div>';
         $('.product_display').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
     })
-
 }
 
 /**
