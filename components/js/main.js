@@ -57,7 +57,7 @@ function getChildProducts(){
                 var sku = '<div class="child_sku">SKU: ' + products[i].sku + '</div>';
                 var quantity = '<div class="child_quantity">Qty: ' + products[i].quantity + '</div></div>';
                 child_container.append(single_child);
-                child_container.find('.child_number'+i).append(color, image, upc, sku, quantity);
+                child_container.find('.child_number'+i).append(image, color, upc, sku, quantity);
             }
             $('.single_child').click(displayProduct);
         })
@@ -76,14 +76,18 @@ function displayProduct(){
     axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
         var products = resp.data[0];
         var title = '<div class="product_display_header">'+products.name+' for '+products.device_model+'('+products.color+')</div>';
-        var image = '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
-            '<img class="product_display_back" src="../public/images/'+products.back_img_location+'">' +
-            '<img class="product_display_side" src="../public/images/'+products.side_img_location+'">';
+        var image = '<div class="product_display_all_images">' +
+                        '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
+                        '<div class="product_display_small_images">' +
+                            '<img class="product_display_back" src="../public/images/'+products.back_img_location+'">' +
+                            '<img class="product_display_side" src="../public/images/'+products.side_img_location+'">' +
+                        '</div>' +
+                    '</div>';
         var description = '<div class="product_display_description_header">Description</div>' +
                 '<div class="product_display_description_body">'+products.description+'</div>';
         var product_upc = '<div class="product_display_upc">UPC: '+products.upc+'</div>';
         var sku = '<div class="product_display_sku">SKU: '+products.sku+'</div>';
-        var quantity = '<div class="product_display_quantity">On Hand: '+products.quantity+'</div>';
+        var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span> <span class="in_stock_amount">'+products.quantity+'</span></div>';
         var retail_price = '<div class="product_display_msrp">MSRP $'+products.retail_price+'</div>';
         var wholesale_table = '<div class="product_display_wholesale">' +
                 '<table style="width: 100%">' +

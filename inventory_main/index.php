@@ -33,8 +33,10 @@ if(isset($_SESSION['user_info'])){
             $description = substr($value['description'], 0, 200);
             echo '<div class="main_item_container">';
             echo '<div class="item_block" upc="'.$value['upc'].'">';
-            echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
-            echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
+            echo '<div class="name_price_container">
+                    <div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>
+                    <div class="item_price">Price: ' . $value['retail_price'] . '</div>
+                  </div>';
             if ($value['thumbnail_location']) {
                 echo '<div class="item_thumbnail"><img src="../public/images/' . $value["thumbnail_location"] . '"></div>';
             } else {
