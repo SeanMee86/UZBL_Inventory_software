@@ -29,7 +29,7 @@ function receive_inventory(){
  * @param qty
  */
 function inventory_update(upc, qty){
-    axios.post('update_inventory.php', {upc, qty}).then(resp=>{
+    axios.post('../backend/update_inventory.php', {upc, qty}).then(resp=>{
         if($('#response_message')){
             $('#response_message').remove();
         }
@@ -47,12 +47,12 @@ function getChildProducts(){
     var child_container = $(this).parent('.main_item_container').find('.child_container');
     if(child_container.find('div').length === 0) {
         var upc = $(this).attr('upc');
-        axios.post('retrieve_child_product.php', {upc}).then(resp => {
+        axios.post('../backend/retrieve_child_product.php', {upc}).then(resp => {
             var products = resp.data;
             for (var i = 0; i < products.length; i++) {
                 var single_child = '<div class="child_number'+i+' single_child" upc="'+products[i].upc+'"></div>';
                 var color = '<div class="single_child"><div class="child_color">' + products[i].color + '</div>';
-                var image = products[i].thumbnail_location ? '<img src="images/'+products[i].thumbnail_location+'">' : '<img src="https://iankbarry.files.wordpress.com/2015/05/91937cf37ba5d6727302ec24851b9a1ff46ae5cdaf1578b7bc7dc2c31a7746b5.jpg" height="150px">';
+                var image = products[i].thumbnail_location ? '<img src="../public/images/'+products[i].thumbnail_location+'">' : '<img src="https://iankbarry.files.wordpress.com/2015/05/91937cf37ba5d6727302ec24851b9a1ff46ae5cdaf1578b7bc7dc2c31a7746b5.jpg" height="150px">';
                 var upc = '<div class="child_upc">UPC: ' + products[i].upc + '</div>';
                 var sku = '<div class="child_sku">SKU: ' + products[i].sku + '</div>';
                 var quantity = '<div class="child_quantity">Qty: ' + products[i].quantity + '</div></div>';
@@ -73,12 +73,12 @@ function getChildProducts(){
 function displayProduct(){
     $('.product_display').children().remove();
     var upc = $(this).attr('upc');
-    axios.post('retrieve_product_for_display.php', {upc}).then(resp => {
+    axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
         var products = resp.data[0];
         var title = '<div class="product_display_header">'+products.name+' for '+products.device_model+'('+products.color+')</div>';
-        var image = '<img class="product_display_front" src="images/' + products.front_img_location + '">' +
-            '<img class="product_display_back" src="images/'+products.back_img_location+'">' +
-            '<img class="product_display_side" src="images/'+products.side_img_location+'">';
+        var image = '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
+            '<img class="product_display_back" src="../public/images/'+products.back_img_location+'">' +
+            '<img class="product_display_side" src="../public/images/'+products.side_img_location+'">';
         var description = '<div class="product_display_description_header">Description</div>' +
                 '<div class="product_display_description_body">'+products.description+'</div>';
         var product_upc = '<div class="product_display_upc">UPC: '+products.upc+'</div>';

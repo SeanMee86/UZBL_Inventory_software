@@ -1,10 +1,10 @@
 <?php
 session_start();
-require "mysql_conf.php";
+require "../backend/mysql_conf.php";
 if(isset($_SESSION['user_info'])){
     include '../components/header/header.php';
     include '../components/sidebar/sidebar.php'; ?>
-    <form class="form-inline" action="inventory_search.php" method="post">
+    <form class="form-inline" action="../inventory_search/index.php" method="post">
         <input class="form-control col-6 inventory_search" type="text" name="search" placeholder="Enter Search Term">
         <input class="btn btn-outline-success search_button" type="submit">
     </form>
@@ -36,7 +36,7 @@ if(isset($_SESSION['user_info'])){
             echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
             echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
             if ($value['thumbnail_location']) {
-                echo '<div class="item_thumbnail"><img src="images/' . $value["thumbnail_location"] . '"></div>';
+                echo '<div class="item_thumbnail"><img src="../public/images/' . $value["thumbnail_location"] . '"></div>';
             } else {
                 echo '<div class="item_thumbnail">Image goes here</div>';
             }

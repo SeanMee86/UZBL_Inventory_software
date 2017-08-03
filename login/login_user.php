@@ -7,7 +7,7 @@
  */
 session_start();
 
-require '../inventory_feature/mysql_conf.php';
+require '../backend/mysql_conf.php';
 
 $user_information = json_decode(file_get_contents('php://input'), true);
 
