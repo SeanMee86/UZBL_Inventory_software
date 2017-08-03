@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "mysql_conf.php";
+require "../backend/mysql_conf.php";
 if(isset($_SESSION['user_info'])){
     include '../components/header/header.php';
     include '../components/sidebar/sidebar.php'; ?>
@@ -45,7 +45,7 @@ if(isset($_SESSION['user_info'])){
                 echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
                 echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
                 if ($value['thumbnail_location']) {
-                    echo '<div class="item_thumbnail"><img src="images/' . $value["thumbnail_location"] . '"></div>';
+                    echo '<div class="item_thumbnail"><img src="../public/images/' . $value["thumbnail_location"] . '"></div>';
                 } else {
                     echo '<div class="item_thumbnail">Image goes here</div>';
                 }

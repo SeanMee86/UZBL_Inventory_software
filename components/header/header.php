@@ -11,7 +11,7 @@
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="../inventory_feature/js/main.js"></script>
+    <script src="../components/js/main.js"></script>
 </head>
 <body>
 <div class="header">
