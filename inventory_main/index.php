@@ -4,7 +4,7 @@ require "../backend/mysql_conf.php";
 if(isset($_SESSION['user_info'])){
     include '../components/header/header.php';
     include '../components/sidebar/sidebar.php'; ?>
-    <form class="form-inline" action="../inventory_search/inventory_search.php" method="post">
+    <form class="form-inline" action="../inventory_search/index.php" method="post">
         <input class="form-control col-6 inventory_search" type="text" name="search" placeholder="Enter Search Term">
         <input class="btn btn-outline-success search_button" type="submit">
     </form>

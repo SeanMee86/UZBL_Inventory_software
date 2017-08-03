@@ -3,12 +3,12 @@
         <li class="sidebar_main"><a href="../dashboard">My Dashboard</a></li>
         <li class="sidebar_main" id="inventory_sidemenu"><a href="../inventory_main/index.php">Inventory</a>
             <?php if(($_SERVER['PHP_SELF'] === "/bizurk_prototype/inventory_main/index.php" ||
-                $_SERVER['PHP_SELF'] === "/bizurk_prototype/ship_receive/ship_receive.php" ||
-                $_SERVER['PHP_SELF'] === "/bizurk_prototype/inventory_search/inventory_search.php") &&
+                $_SERVER['PHP_SELF'] === "/bizurk_prototype/ship_receive/index.php" ||
+                $_SERVER['PHP_SELF'] === "/bizurk_prototype/inventory_search/index.php") &&
                 ($_SESSION['privileges']['admin'] || $_SESSION['privileges']['shipping'])){;?>
             <ul>
                 <li class="sidebar_sub">History</li>
-                <li class="sidebar_sub"><a href="../ship_receive/ship_receive.php">Updater</a></li>
+                <li class="sidebar_sub"><a href="../ship_receive/index.php">Updater</a></li>
                 <li class="sidebar_sub">New Product</li>
             </ul>
             <?php }; ?>
