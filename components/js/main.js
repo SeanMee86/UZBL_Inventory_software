@@ -49,7 +49,7 @@ function getChildProducts(){
     var child_container = $(this).parent('.main_item_container').find('.child_container');
     if(child_container.find('div').length === 0) {
         var upc = $(this).attr('upc');
-        axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
+        axios.post('../backend/retrieve_child_product.php', {upc}).then(resp => {
             var products = resp.data;
             for (var i = 0; i < products.length; i++) {
                 var single_child = '<div class="child_number'+i+' single_child" upc="'+products[i].upc+'"></div>';
