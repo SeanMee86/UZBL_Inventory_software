@@ -12,7 +12,7 @@ function ship_inventory(){
     let upc = $('#upc').val();
     let qty = $('#qty').val();
     inventory_update(upc, qty);
-    $('#upc').focus();
+
 }
 
 /**
@@ -22,7 +22,6 @@ function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
     inventory_update(upc, qty);
-    $('#upc').focus();
 }
 
 /**
@@ -35,10 +34,10 @@ function inventory_update(upc, qty){
         if($('#response_message')){
             $('#response_message').remove();
         }
-        let response_message = '<div id="response_message">'+resp['data']+'</div>'
+        let response_message = '<div id="response_message">'+resp['data']+'</div>';
         $('#form_response').append(response_message);
     });
-    $('#upc').val('');
+    $('#upc').val('').focus();
     $('#qty').val('');
 }
 

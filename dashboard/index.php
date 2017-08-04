@@ -9,7 +9,7 @@ if(isset($_SESSION['user_info'])){
 
     echo '<div>Welcome ' . $user_info['first_name'].'</div>';
 
-        include('../components/footer/footer.php');
+    include('../components/footer/footer.php');
 
 }else{
     header('location: ../login');

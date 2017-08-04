@@ -40,9 +40,14 @@ if(isset($_SESSION['user_info'])){
             if ($value['thumbnail_location']) {
                 echo '<div class="item_thumbnail"><img src="../public/images/' . $value["thumbnail_location"] . '"></div>';
             } else {
-                echo '<div class="item_thumbnail">Image goes here</div>';
+                echo '<div class="item_thumbnail"><img src="../public/images/placeholder150-min.png"></div>';
             }
-            echo '<div class="item_description">' . $description . '...</div>';
+            echo '<div class="item_description">' . $description;
+            if(strlen($description)>=200) {
+                echo '...</div>';
+            }else{
+                echo '</div>';
+            }
             for($i=0; $i<count($total_qty_data); $i++){
                 if($total_qty_data[$i]['device_model']===$value['device_model'] && $total_qty_data[$i]['name']===$value['name']){
                     echo '<div class="item_quantity">Qty: ' . $total_qty_data[$i]['SUM(`quantity`)'] . '</div>';;
