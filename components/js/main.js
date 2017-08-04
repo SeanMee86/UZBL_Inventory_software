@@ -51,11 +51,11 @@ function getChildProducts(){
             var products = resp.data;
             for (var i = 0; i < products.length; i++) {
                 var single_child = '<div class="child_number'+i+' single_child" upc="'+products[i].upc+'"></div>';
-                var color = '<div class="single_child"><div class="child_color">' + products[i].color + '</div>';
+                var color = '<div class="child_color">' + products[i].color + '</div>';
                 var image = products[i].thumbnail_location ? '<img src="../public/images/'+products[i].thumbnail_location+'">' : '<img src="https://iankbarry.files.wordpress.com/2015/05/91937cf37ba5d6727302ec24851b9a1ff46ae5cdaf1578b7bc7dc2c31a7746b5.jpg" height="150px">';
                 var upc = '<div class="child_upc">UPC: ' + products[i].upc + '</div>';
                 var sku = '<div class="child_sku">SKU: ' + products[i].sku + '</div>';
-                var quantity = '<div class="child_quantity">Qty: ' + products[i].quantity + '</div></div>';
+                var quantity = '<div class="child_quantity">Qty: ' + products[i].quantity + '</div>';
                 child_container.append(single_child);
                 child_container.find('.child_number'+i).append(image, color, upc, sku, quantity);
             }
