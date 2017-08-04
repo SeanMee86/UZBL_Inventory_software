@@ -60,10 +60,12 @@ function getChildProducts(){
                 child_container.find('.child_number'+i).append(image, color, upc, sku, quantity);
             }
             $('.single_child').click(displayProduct);
-        })
+        });
+        $(this).addClass('selected');
     }else{
         child_container.children().remove();
         $('.product_display').children().remove();
+        $(this).removeClass('selected');
     }
 }
 
@@ -72,6 +74,8 @@ function getChildProducts(){
  */
 function displayProduct(){
     $('.product_display').children().remove();
+    $('.single_child').removeClass('selected');
+    $(this).addClass('selected')
     var upc = $(this).attr('upc');
     axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
         var products = resp.data[0];

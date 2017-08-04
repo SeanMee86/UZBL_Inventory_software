@@ -119,6 +119,9 @@ a {
         box-shadow: 0px 0px 30px -3px rgba(0,0,0,0.33);
         padding:10px;
     }
+    div.selected{
+        border: 2px solid deepskyblue;
+    }
     /*
         .item_name {
             display:inline-block;
@@ -152,9 +155,12 @@ a {
             /* CHILD PRODUCT STYLES */ 
               div[class*="child_number"] { /* Targets all classes that contain "child_number" */
                     margin-left: 50px;
-                    border: 1.5px solid #b5b5b5;
                     padding: 2px 10px;
                  }
+
+                .single_child{ /*Separated from above for specificity override with 'selected' class*/
+                    border: 1.5px solid #b5b5b5;
+                }
 
                  .single_child img {
                     display: inline-block;
