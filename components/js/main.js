@@ -12,6 +12,7 @@ function ship_inventory(){
     let upc = $('#upc').val();
     let qty = $('#qty').val();
     inventory_update(upc, qty);
+    $('#upc').focus();
 }
 
 /**
@@ -21,6 +22,7 @@ function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
     inventory_update(upc, qty);
+    $('#upc').focus();
 }
 
 /**
@@ -47,7 +49,7 @@ function getChildProducts(){
     var child_container = $(this).parent('.main_item_container').find('.child_container');
     if(child_container.find('div').length === 0) {
         var upc = $(this).attr('upc');
-        axios.post('../backend/retrieve_child_product.php', {upc}).then(resp => {
+        axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
             var products = resp.data;
             for (var i = 0; i < products.length; i++) {
                 var single_child = '<div class="child_number'+i+' single_child" upc="'+products[i].upc+'"></div>';
@@ -76,52 +78,70 @@ function displayProduct(){
     $('.product_display').children().remove();
     $('.single_child').removeClass('selected');
     $(this).addClass('selected')
-    var upc = $(this).attr('upc');
+    if($(this).attr('upc')){
+        var upc = $(this).attr('upc');
+    }else{
+        upc = $('#upc').val();
+    }
+    var display_container = '<div class="product_display_container"></div>';
     axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
         var products = resp.data[0];
-        var display_container = '<div class="product_display_container"></div>'
-        var title = '<div class="product_display_header">'+products.name+' for '+products.device_model+'('+products.color+')</div>';
-        var image = '<div class="product_display_all_images">' +
-                        '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
-                        '<div class="product_display_small_images">' +
-                            '<img class="product_display_back" src="../public/images/'+products.back_img_location+'">' +
-                            '<img class="product_display_side" src="../public/images/'+products.side_img_location+'">' +
-                        '</div>' +
+        if(products) {
+            var title = '<div class="product_display_header">' + products.name + ' for ' + products.device_model + '(' + products.color + ')</div>';
+            if(products.back_img_location && products.side_img_location) {
+                var image = '<div class="product_display_all_images">' +
+                    '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
+                    '<div class="product_display_small_images">' +
+                    '<img class="product_display_back" src="../public/images/' + products.back_img_location + '">' +
+                    '<img class="product_display_side" src="../public/images/' + products.side_img_location + '">' +
+                    '</div>' +
                     '</div>';
-        var description = '<div class="product_display_description_header">Description</div>' +
-                '<div class="product_display_description_body">'+products.description+'</div>';
-        var product_upc = '<div class="product_display_upc">UPC: '+products.upc+'</div>';
-        var sku = '<div class="product_display_sku">SKU: '+products.sku+'</div>';
-        var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span> <span class="in_stock_amount">'+products.quantity+'</span></div>';
-        var retail_price = '<div class="product_display_msrp">MSRP $'+products.retail_price+'</div>';
-        var wholesale_table = '<div class="product_display_wholesale">' +
+            }else{
+                image = '<div class="product_display_all_images">' +
+                    '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
+                    '</div>';
+            }
+            var description = '<div class="product_display_description_header">Description</div>' +
+                '<div class="product_display_description_body">' + products.description + '</div>';
+            var product_upc = '<div class="product_display_upc">UPC: ' + products.upc + '</div>';
+            var sku = '<div class="product_display_sku">SKU: ' + products.sku + '</div>';
+            var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span> <span class="in_stock_amount">' + products.quantity + '</span></div>';
+            var retail_price = '<div class="product_display_msrp">MSRP $' + products.retail_price + '</div>';
+            var wholesale_table = '<div class="product_display_wholesale">' +
                 '<table style="width: 100%">' +
-                    '<tr>' +
-                        '<th>QTY:</th>' +
-                        '<th>1-50</th>' +
-                        '<th>51-200</th>' +
-                        '<th>201-349</th>' +
-                        '<th>350-499</th>' +
-                        '<th>500-999</th>' +
-                        '<th>1000-2999</th>' +
-                        '<th>3000-4999</th>' +
-                        '<th>5000+</th>' +
-                    '</tr>' +
-                    '<tr>' +
-                        '<td></td>' +
-                        '<td>$'+products["tier1_1-50"]+'</td>' +
-                        '<td>$'+products["tier2_51-200"]+'</td>' +
-                        '<td>$'+products["tier3_201-349"]+'</td>' +
-                        '<td>$'+products["tier4_350-499"]+'</td>' +
-                        '<td>$'+products["tier5_500-999"]+'</td>' +
-                        '<td>$'+products["tier6_1000-2999"]+'</td>' +
-                        '<td>$'+products["tier7_3000-4999"]+'</td>' +
-                        '<td>$'+products["tier8_5000"]+'</td>' +
-                    '</tr>'+
-            '</table>'+
-            '</div>';
-        $('.product_display').append(display_container);
-        $('.product_display_container').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
+                '<tr>' +
+                '<th>QTY:</th>' +
+                '<th>1-50</th>' +
+                '<th>51-200</th>' +
+                '<th>201-349</th>' +
+                '<th>350-499</th>' +
+                '<th>500-999</th>' +
+                '<th>1000-2999</th>' +
+                '<th>3000-4999</th>' +
+                '<th>5000+</th>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td>$' + products["tier1_1-50"] + '</td>' +
+                '<td>$' + products["tier2_51-200"] + '</td>' +
+                '<td>$' + products["tier3_201-349"] + '</td>' +
+                '<td>$' + products["tier4_350-499"] + '</td>' +
+                '<td>$' + products["tier5_500-999"] + '</td>' +
+                '<td>$' + products["tier6_1000-2999"] + '</td>' +
+                '<td>$' + products["tier7_3000-4999"] + '</td>' +
+                '<td>$' + products["tier8_5000"] + '</td>' +
+                '</tr>' +
+                '</table>' +
+                '</div>';
+            $('.product_display').append(display_container);
+            $('.product_display_container').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
+        }else{
+            title = '<div class="product_display_header">Item Not Found</div>';
+            image = '<img class="item_not_found_image" src="../public/images/placeholder1080-min.png">';
+            var errorMessage = '<div class ="upc_not_found">The UPC You Have Entered Does Not Exist</div>';
+            $('.product_display').append(display_container);
+            $('.product_display_container').append(title, image, errorMessage);
+        }
     })
 }
 
@@ -132,5 +152,6 @@ function apply_click_handler(){
     $('#inventory_shipped').click(ship_inventory);
     $('#inventory_received').click(receive_inventory);
     $('.item_block').click(getChildProducts);
+    $('#upc').blur(displayProduct);
 }
 
