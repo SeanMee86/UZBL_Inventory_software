@@ -21,7 +21,7 @@ a {
     --mainGrey: #8f8f8f;
     --dashColor: #1e2126; 
     --darkBlue: #0c1c29; 
-    --displayText: white;
+    --displayText: grey;
     --title: 18px;
     --textSize: 13px;
 }
@@ -88,6 +88,11 @@ a {
         right: 10px;
         top: 64px;
         margin-right: -10px;
+    }
+
+    .product_display_container{
+        background-color: white;
+        height: 92vh;
     }
 
     img.product_display_front {

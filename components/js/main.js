@@ -75,6 +75,7 @@ function displayProduct(){
     var upc = $(this).attr('upc');
     axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
         var products = resp.data[0];
+        var display_container = '<div class="product_display_container"></div>'
         var title = '<div class="product_display_header">'+products.name+' for '+products.device_model+'('+products.color+')</div>';
         var image = '<div class="product_display_all_images">' +
                         '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
@@ -115,7 +116,8 @@ function displayProduct(){
                     '</tr>'+
             '</table>'+
             '</div>';
-        $('.product_display').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
+        $('.product_display').append(display_container);
+        $('.product_display_container').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
     })
 }
 
