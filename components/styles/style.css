@@ -21,7 +21,7 @@ a {
     --mainGrey: #8f8f8f;
     --dashColor: #1e2126; 
     --darkBlue: #0c1c29; 
-    --displayText: grey;
+    --displayText: #101010;
     --title: 18px;
     --textSize: 13px;
 }
@@ -77,6 +77,8 @@ a {
 
     .item_quantity { 
         color: #909090;
+        float:right;
+        margin-top:-30px;
     }
 
     /* INVENTORY PRODUCT DISPLAY STYLES */
@@ -93,24 +95,33 @@ a {
     .product_display_container{
         background-color: white;
         height: 92vh;
+        padding:20px;
     }
 
     img.product_display_front {
         width: 65%;
+        vertical-align:top;
     }
 
-    img.product_display_back {
-        width: 30%;
-        position: absolute;
-        top: 7%;
-        right: 3%;
+    .product_display_all_images {
+        text-align:center;
     }
 
-    img.product_display_side {
-        width: 30%;
-        position: absolute;
-        top: 23%;
+
+    .product_display_small_images { 
+        display:inline-block;
     }
+            img.product_display_back {
+                display:block;
+                top: 7%;
+                right: 3%;
+            }
+
+
+            img.product_display_side {
+                display:block;
+                top: 23%;
+            }
 
     img.item_not_found_image {
         height: 40%;
@@ -137,7 +148,21 @@ a {
     div.selected{
         border: 2px solid deepskyblue;
     }
-    /*
+
+            .single_child.selected{
+                border: 2px solid deepskyblue;
+            }
+
+            .single_child.selected::after{
+               width:30px;
+               height:30px;
+               content: url("../../public/images/bluearrow-min.png");
+               margin-left:10px;
+               margin-top:20px;
+               position:absolute;
+               
+               
+            }
         .item_name {
             display:inline-block;
         }
@@ -147,7 +172,7 @@ a {
             float:right;
         }
 
-        */
+        
 
         .item_thumbnail {
             display:inline-block;
@@ -165,12 +190,19 @@ a {
             vertical-align:middle;
             font-size: var(--textSize);
             color: var(--mainGrey); 
+            margin-bottom:30px;
         }
 
             /* CHILD PRODUCT STYLES */ 
               div[class*="child_number"] { /* Targets all classes that contain "child_number" */
                     margin-left: 50px;
                     padding: 2px 10px;
+                 }
+
+                 .child_color {
+                    display:inline-block;
+                    padding-left:10px;
+                    min-width: 47px;
                  }
 
                 .single_child{ /*Separated from above for specificity override with 'selected' class*/
@@ -193,6 +225,7 @@ a {
                     color: var(--mainGrey);
                     display: inline-block;
                     padding-right:40px;
+                    min-width: 193px;
                  }
 
                  .child_quantity {
@@ -200,7 +233,7 @@ a {
                     display: inline-block;
                  }
 
-    /* PRODUCT DISPLAY */ 
+    /* =========================== PRODUCT DISPLAY =========================== */ 
     .product_display {
         background-color: var(--darkBlue, #0c1c29);
         top: 47px !important;
@@ -212,6 +245,7 @@ a {
         color: var(--displayText);
         font-size: var(--title);
         text-align:center;
+        padding-bottom:10px;
     }
 
     .product_display_front {
