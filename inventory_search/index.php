@@ -32,7 +32,7 @@ if(isset($_SESSION['user_info'])){
     }
 
     $result = mysqli_query($conn, $sql);
-    if($result) {
+    if($result && mysqli_num_rows($result)>0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $data[] = $row;
         }

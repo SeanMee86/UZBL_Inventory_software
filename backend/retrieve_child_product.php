@@ -6,7 +6,9 @@
  * Time: 12:48 PM
  */
 session_start();
+
 require "mysql_conf.php";
+
 if(isset($_SESSION['user_info'])){
     $product_information = json_decode(file_get_contents('php://input'), true);
     $upc = mysqli_real_escape_string($conn, $product_information['upc']);
