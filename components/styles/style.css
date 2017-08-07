@@ -26,6 +26,7 @@ a {
     --textSize: 15px;
     --childTextSize: 13px;
     --descriptionIndent: 15px;
+    --historyPadding:20px;
 }
 
 /* =========================== Global Navigation Styling =========================== */ 
@@ -235,6 +236,10 @@ a {
                     font-size: var(--childTextSize);
                  }
 
+                 .child_text {
+                    display:inline-block;
+                 }
+
     /* =========================== PRODUCT DISPLAY =========================== */ 
     .product_display {
         background-color: var(--darkBlue, #0c1c29);
@@ -334,6 +339,26 @@ a {
     }
 
 
+    /* ================================ HISTORY DISPLAY ================================ */ 
+
+.history_thumbnail {
+    width:60px;
+    height:auto;
+    padding-right:var(--historyPadding);
+}
+
+.history_name, .history_time, .history_upc, .history_qty_diff, .history_qty_curr {
+    padding-right:var(--historyPadding);
+    display: inline-block;
+    min-width:300px;
+}
+
+
+
+
+
+
+
     /* ================================================================ */ 
 
 /* MEDIA QUERIES */ 
@@ -354,6 +379,12 @@ a {
 @media screen and (max-width: 1680px) {
     .item_description{
             width:20vw;   
+    }
+
+    .child_text {
+            display:inline-block;
+            max-width:75%;
+            margin-left:20px;
     }
 }
 
