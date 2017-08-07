@@ -24,4 +24,7 @@
     </ul>
 </div>
 <div class="inventory_container">
+    <?php
+    if($url !== $base_url."history_feature/index.php"){?>
 <div class="product_display"></div>
+    <?php }; ?>

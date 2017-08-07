@@ -12,7 +12,6 @@ function ship_inventory(){
     let upc = $('#upc').val();
     let qty = $('#qty').val();
     inventory_update(upc, qty);
-    record_history(upc, qty);
 }
 
 /**
@@ -22,7 +21,6 @@ function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
     inventory_update(upc, qty);
-    record_history(upc, qty);
 }
 
 /**
@@ -37,6 +35,7 @@ function inventory_update(upc, qty){
         }
         let response_message = '<div id="response_message">'+resp['data']+'</div>';
         $('#form_response').append(response_message);
+        record_history(upc, qty);
     });
     $('#upc').val('').focus();
     $('#qty').val('');
@@ -68,11 +67,12 @@ function getChildProducts(){
                 var upc = '<div class="child_upc">UPC: ' + products[i].upc + '</div>';
                 var sku = '<div class="child_sku">SKU: ' + products[i].sku + '</div>';
                 var quantity = '<div class="child_quantity">Qty: ' + products[i].quantity + '</div>';
+                var child_text = '<div class="child_text">'+color+upc+sku+quantity+'</div>';
                 child_container.append(single_child);
-                child_container.find('.child_number'+i).append(image, color, upc, sku, quantity);
+                child_container.find('.child_number'+i).append(image, child_text);
             }
-            $('.single_child').unbind('click');
-            $('.single_child').click(displayProduct);
+            $('.single_child').unbind('click').click(displayProduct);
+
         });
         $(this).addClass('selected');
     }else{
