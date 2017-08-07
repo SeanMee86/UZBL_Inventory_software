@@ -23,7 +23,7 @@
         <li class="sidebar_main">Update Sales Leads</li>
     </ul>
 </div>
-<div class="inventory_container">
+<div class="inventory_container" <?php if($url === $base_url."history_feature/index.php"){echo 'style="max-width:100%"';};?> >
     <?php
     if($url !== $base_url."history_feature/index.php"){?>
 <div class="product_display"></div>

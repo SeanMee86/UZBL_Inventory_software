@@ -13,11 +13,11 @@ if(isset($_SESSION['user_info'])){
             }
             foreach ($data as $key => $value) {
                 echo '<img src="../public/images/' . $value["thumbnail_location"] . '" class="history_thumbnail">';
-                echo '<span class="history_name">'.$value['name'].' '.$value['device_model'].' ('.$value['color'].') </span>';
-                echo '<span class="history_time">'.$value['timestamp'].' </span>';
-                echo '<span class="history_upc">'.$value['upc'].' </span>';
-                echo '<span class="history_qty_diff">'.$value['qty_difference'].' </span>';
-                echo '<span class="history_qty_curr">'.$value['qty_current'].' </span>';
+                echo '<div class="history_name">'.$value['name'].' '.$value['device_model'].' ('.$value['color'].') </div>';
+                echo '<div class="history_time">'.$value['timestamp'].' </div>';
+                echo '<div class="history_upc">'.$value['upc'].' </div>';
+                echo '<div class="history_qty_diff">'.$value['qty_difference'].' </div>';
+                echo '<div class="history_qty_curr">'.$value['qty_current'].' </div>';
                 echo '<br>';
             }
         }
