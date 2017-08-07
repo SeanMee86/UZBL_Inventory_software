@@ -42,16 +42,24 @@ if(isset($_SESSION['user_info'])){
                 $description = substr($value['description'], 0, 200);
                 echo '<div class="main_item_container">';
                 echo '<div class="item_block" upc="'.$value['upc'].'">';
-                echo '<div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>';
-                echo '<div class="item_price">Price: ' . $value['retail_price'] . '</div>';
+                echo '<div class="name_price_container">
+                    <div class="item_name">' . $value['name'] . ' for ' . $value['device_model'] . '</div>
+                    <div class="item_price">Price: ' . $value['retail_price'] . '</div>
+                  </div>';
+                echo '<div class="thumb_description_container">';
                 if ($value['thumbnail_location']) {
                     echo '<div class="item_thumbnail"><img src="../public/images/' . $value["thumbnail_location"] . '"></div>';
                 } else {
-                    echo '<div class="item_thumbnail">Image goes here</div>';
+                    echo '<div class="item_thumbnail"><img src="../public/images/placeholder150-min.png"></div>';
                 }
-                echo '<div class="item_description">' . $description . '...</div>';
-                $count = count($total_qty_data);
-                for($i=0; $i<$count; $i++){
+                echo '<div class="item_description">' . $description;
+                if(strlen($description)>=200) {
+                    echo '...</div>';
+                }else{
+                    echo '</div>';
+                }
+                echo '</div>';
+                for($i=0; $i<count($total_qty_data); $i++){
                     if($total_qty_data[$i]['device_model']===$value['device_model'] && $total_qty_data[$i]['name']===$value['name']){
                         echo '<div class="item_quantity">Qty: ' . $total_qty_data[$i]['SUM(`quantity`)'] . '</div>';;
                     }
