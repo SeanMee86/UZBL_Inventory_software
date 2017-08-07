@@ -42,6 +42,17 @@ function inventory_update(upc, qty){
 }
 
 /**
+ * Record the shipping and receiving history from inventory updater
+ * @param upc
+ * @param qty
+ */
+function record_history(upc, qty){
+    axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
+
+    });
+
+}
+/**
  * Get the information to display child products on inventory search page
  */
 function getChildProducts(){
