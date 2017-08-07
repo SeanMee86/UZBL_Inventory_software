@@ -12,7 +12,13 @@ if(isset($_SESSION['user_info'])){
                 $data[] = $row;
             }
             foreach ($data as $key => $value) {
-                echo '<img src="../public/images/' . $value["thumbnail_location"] . '" width="10%">' . "-" . $value['upc'] . "-" . $value['name'] . "-" . $value['device_model'] . "-" . $value['color'] . "-" . $value['timestamp'] . "-" . $value['qty_difference'] . "-" . $value['qty_current'] . "<br>";
+                echo '<img src="../public/images/' . $value["thumbnail_location"] . '" class="history_thumbnail">';
+                echo '<span class="history_name">'.$value['name'].' '.$value['device_model'].' ('.$value['color'].') </span>';
+                echo '<span class="history_time">'.$value['timestamp'].' </span>';
+                echo '<span class="history_upc">'.$value['upc'].' </span>';
+                echo '<span class="history_qty_diff">'.$value['qty_difference'].' </span>';
+                echo '<span class="history_qty_curr">'.$value['qty_current'].' </span>';
+                echo '<br>';
             }
         }
         include '../components/footer/footer.php';
