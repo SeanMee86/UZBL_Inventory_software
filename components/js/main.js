@@ -48,7 +48,7 @@ function inventory_update(upc, qty){
  */
 function record_history(upc, qty){
     axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
-
+        console.log('Our response from record history php file: ', resp);
     });
 
 }
@@ -71,6 +71,7 @@ function getChildProducts(){
                 child_container.append(single_child);
                 child_container.find('.child_number'+i).append(image, color, upc, sku, quantity);
             }
+            $('.single_child').unbind('click');
             $('.single_child').click(displayProduct);
         });
         $(this).addClass('selected');
@@ -87,7 +88,7 @@ function getChildProducts(){
 function displayProduct(){
     $('.product_display').children().remove();
     $('.single_child').removeClass('selected');
-    $(this).addClass('selected')
+    $(this).addClass('selected');
     if($(this).attr('upc')){
         var upc = $(this).attr('upc');
     }else{
@@ -152,7 +153,7 @@ function displayProduct(){
             $('.product_display').append(display_container);
             $('.product_display_container').append(title, image, errorMessage);
         }
-    })
+    });
 }
 
 /**
