@@ -12,7 +12,7 @@ function ship_inventory(){
     let upc = $('#upc').val();
     let qty = $('#qty').val();
     inventory_update(upc, qty);
-
+    record_history(upc, qty);
 }
 
 /**
@@ -22,6 +22,7 @@ function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
     inventory_update(upc, qty);
+    record_history(upc, qty);
 }
 
 /**
@@ -48,7 +49,6 @@ function inventory_update(upc, qty){
  */
 function record_history(upc, qty){
     axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
-        console.log('Our response from record history php file: ', resp);
     });
 
 }
