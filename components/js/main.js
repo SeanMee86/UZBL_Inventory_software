@@ -117,6 +117,7 @@ function displayProduct(){
             var product_upc = '<div class="product_display_upc">UPC: ' + products.upc + '</div>';
             var sku = '<div class="product_display_sku">SKU: ' + products.sku + '</div>';
             var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span> <span class="in_stock_amount">' + products.quantity + '</span></div>';
+            var price_container = '<div class="product_price_container"></div>';
             var retail_price = '<div class="product_display_msrp">MSRP $' + products.retail_price + '</div>';
             var wholesale_table = '<div class="product_display_wholesale">' +
                 '<table style="width: 100%">' +
@@ -145,7 +146,8 @@ function displayProduct(){
                 '</table>' +
                 '</div>';
             $('.product_display').append(display_container);
-            $('.product_display_container').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
+            $('.product_display_container').append(title, image, description, product_upc, sku, quantity, price_container);
+            $('.product_price_container').append('<div><b>Pricing</b></div>',retail_price, wholesale_table)
         }else{
             title = '<div class="product_display_header">Item Not Found</div>';
             image = '<img class="item_not_found_image" src="../public/images/placeholder1080-min.png">';
