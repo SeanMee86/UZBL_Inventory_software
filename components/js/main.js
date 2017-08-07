@@ -12,7 +12,7 @@ function ship_inventory(){
     let upc = $('#upc').val();
     let qty = $('#qty').val();
     inventory_update(upc, qty);
-
+    record_history(upc, qty);
 }
 
 /**
@@ -22,6 +22,7 @@ function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
     inventory_update(upc, qty);
+    record_history(upc, qty);
 }
 
 /**
@@ -42,6 +43,16 @@ function inventory_update(upc, qty){
 }
 
 /**
+ * Record the shipping and receiving history from inventory updater
+ * @param upc
+ * @param qty
+ */
+function record_history(upc, qty){
+    axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
+    });
+
+}
+/**
  * Get the information to display child products on inventory search page
  */
 function getChildProducts(){
@@ -60,6 +71,7 @@ function getChildProducts(){
                 child_container.append(single_child);
                 child_container.find('.child_number'+i).append(image, color, upc, sku, quantity);
             }
+            $('.single_child').unbind('click');
             $('.single_child').click(displayProduct);
         });
         $(this).addClass('selected');
@@ -76,7 +88,7 @@ function getChildProducts(){
 function displayProduct(){
     $('.product_display').children().remove();
     $('.single_child').removeClass('selected');
-    $(this).addClass('selected')
+    $(this).addClass('selected');
     if($(this).attr('upc')){
         var upc = $(this).attr('upc');
     }else{
@@ -105,6 +117,7 @@ function displayProduct(){
             var product_upc = '<div class="product_display_upc">UPC: ' + products.upc + '</div>';
             var sku = '<div class="product_display_sku">SKU: ' + products.sku + '</div>';
             var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span> <span class="in_stock_amount">' + products.quantity + '</span></div>';
+            var price_container = '<div class="product_price_container"></div>';
             var retail_price = '<div class="product_display_msrp">MSRP $' + products.retail_price + '</div>';
             var wholesale_table = '<div class="product_display_wholesale">' +
                 '<table style="width: 100%">' +
@@ -133,7 +146,8 @@ function displayProduct(){
                 '</table>' +
                 '</div>';
             $('.product_display').append(display_container);
-            $('.product_display_container').append(title, image, description, product_upc, sku, quantity, retail_price, wholesale_table);
+            $('.product_display_container').append(title, image, description, product_upc, sku, quantity, price_container);
+            $('.product_price_container').append('<div><b>Pricing</b></div>',retail_price, wholesale_table)
         }else{
             title = '<div class="product_display_header">Item Not Found</div>';
             image = '<img class="item_not_found_image" src="../public/images/placeholder1080-min.png">';
@@ -141,7 +155,7 @@ function displayProduct(){
             $('.product_display').append(display_container);
             $('.product_display_container').append(title, image, errorMessage);
         }
-    })
+    });
 }
 
 /**
