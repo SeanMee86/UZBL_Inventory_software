@@ -19,13 +19,11 @@ if(isset($_SESSION['user_info'])){
     $thumbnail = $data[0]['thumbnail_location'];
     $qty_diff = -$qty;
     $qty_current = $data[0]['quantity'];
-    if($qty<=$qty_current) {
-        $sql = "INSERT INTO `history`(`upc`, `name`, `device_model`, `color`, `thumbnail_location`, `qty_difference`, `qty_current`)
-            VALUES ($upc, '$name', '$device_model', '$color', '$thumbnail', $qty_diff, $qty_current)";
-        $result = mysqli_query($conn, $sql);
-    }
+    $sql = "INSERT INTO `history`(`upc`, `name`, `device_model`, `color`, `thumbnail_location`, `qty_difference`, `qty_current`)
+        VALUES ($upc, '$name', '$device_model', '$color', '$thumbnail', $qty_diff, $qty_current)";
+    $result = mysqli_query($conn, $sql);
     if($result){
-        echo "history inserted";
+        echo $qty .' '.$qty_current;
     }else{
         echo "history not recorded: " . mysqli_error($conn);
     }

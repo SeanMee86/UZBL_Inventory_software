@@ -33,9 +33,15 @@ function inventory_update(upc, qty){
         if($('#response_message')){
             $('#response_message').remove();
         }
-        let response_message = '<div id="response_message">'+resp['data']+'</div>';
-        $('#form_response').append(response_message);
-        record_history(upc, qty);
+        if(resp['data']['is_error']){
+            let response_message = '<div id="response_message">'+resp['data']['message']+'</div>';
+            $('#form_response').append(response_message);
+
+        }else {
+            let response_message = '<div id="response_message">' + resp['data'] + '</div>';
+            $('#form_response').append(response_message);
+            record_history(upc, qty);
+        }
     });
     $('#upc').val('').focus();
     $('#qty').val('');

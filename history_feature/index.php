@@ -12,6 +12,9 @@ if(isset($_SESSION['user_info'])){
                 $data[] = $row;
             }
             foreach ($data as $key => $value) {
+                if($value['qty_difference']>0){
+                    $value['qty_difference'] = '+'.$value['qty_difference'];
+                }
                 echo '<img src="../public/images/' . $value["thumbnail_location"] . '" class="history_thumbnail">';
                 echo '<div class="history_name">'.$value['name'].' '.$value['device_model'].' ('.$value['color'].') </div>';
                 echo '<div class="history_time">'.$value['timestamp'].' </div>';

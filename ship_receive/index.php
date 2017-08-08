@@ -7,12 +7,12 @@ if(isset($_SESSION['user_info'])){
         ?>
 
         <form>
-            <input id="upc" class="form-control col-3" autofocus="autofocus" type="text" name="upc" placeholder="Enter UPC">
+            <input id="upc" class="form-control col-6" autofocus="autofocus" type="text" name="upc" placeholder="Enter UPC">
             <br>
-            <input id="qty" class="form-control col-3" type="text" name="qty" placeholder="Enter Quantity">
+            <input id="qty" class="form-control col-6" type="text" name="qty" placeholder="Enter Quantity">
             <br>
             <input id="inventory_received" class="btn btn-info col-2" type="button" value="Receive">
-            <br><br>
+
             <input id="inventory_shipped" class="btn col-2" type="button" value="Send">
         </form>
         <div id="form_response"></div>

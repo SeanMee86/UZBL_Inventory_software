@@ -44,5 +44,7 @@ if($qty_on_hand >= $qty) {
         echo 'inventory update failed: ' . mysqli_error($conn);
     }
 }else{
-    echo"Insufficient Inventory";
+    $error['is_error']=true;
+    $error['message']='Insufficient Inventory';
+    print_r(json_encode($error));
 }
