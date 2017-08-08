@@ -5,7 +5,9 @@ if(isset($_SESSION['user_info'])){
     if($_SESSION['privileges']['admin'] || $_SESSION['privileges']['shipping']) {
         include '../components/header/header.php';
         include '../components/sidebar/sidebar.php';
-        $sql = "SELECT * FROM `history`";
+        $sql = "DELETE FROM `history` WHERE `timestamp` < (NOW() - INTERVAL 7 DAY)";
+        $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM `history` ORDER BY `timestamp` DESC";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {

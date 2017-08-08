@@ -3,6 +3,7 @@
  */
 $(document).ready(function(){
     apply_click_handler();
+    restrictKeyPress();
 });
 
 /**
@@ -15,6 +16,15 @@ function ship_inventory(){
 }
 
 /**
+ * Restrict unwanted key presses in quantity input for Inventory Update feature
+ */
+function restrictKeyPress(){
+    $('#qty').keydown(function(e){
+        return (e.which <= 57 && e.which >= 48) || (e.which <= 40 && e.which >= 37) || (e.which <= 105 && e.which >= 96) || e.which === 8 || e.which === 46;
+    })
+}
+
+/**
  * Add items to inventory based on user inputs
  */
 function receive_inventory(){
@@ -24,17 +34,15 @@ function receive_inventory(){
 }
 
 /**
- * Send the information to the server
+ * Send the information to the server for updating inventory
  * @param upc
  * @param qty
  */
 function inventory_update(upc, qty){
     axios.post('../backend/update_inventory.php', {upc, qty}).then(resp=>{
-        if($('#response_message')){
-            $('#response_message').remove();
-        }
+        $('#response_message').remove();
         if(resp['data']['is_error']){
-            let response_message = '<div id="response_message">'+resp['data']['message']+'</div>';
+            let response_message = '<div id="response_message">'+resp['data']['error_message']+'</div>';
             $('#form_response').append(response_message);
 
         }else {
@@ -154,7 +162,7 @@ function displayProduct(){
             $('.product_display').append(display_container);
             $('.product_display_container').append(title, image, description, product_upc, sku, quantity, price_container);
             $('.product_price_container').append('<div><b>Pricing</b></div>',retail_price, wholesale_table)
-        }else{
+        }else if($('#upc').val() !== ''){
             title = '<div class="product_display_header">Item Not Found</div>';
             image = '<img class="item_not_found_image" src="../public/images/placeholder1080-min.png">';
             var errorMessage = '<div class ="upc_not_found">The UPC You Have Entered Does Not Exist</div>';

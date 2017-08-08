@@ -17,9 +17,11 @@ $select_qty_row = mysqli_fetch_assoc($select_qty_result);
 
 $qty_on_hand = $select_qty_row['quantity'];
 
+$new_qty = $qty_on_hand-$qty;
+
 //Query for updating the database inventory based on user info
 if($qty_on_hand >= $qty) {
-    $update_sql = "UPDATE `inventory` SET `quantity`=$qty_on_hand-$qty WHERE `upc`=$upc";
+    $update_sql = "UPDATE `inventory` SET `quantity`=$new_qty WHERE `upc`=$upc";
 
 //Send query to the database
     $update_result = mysqli_query($conn, $update_sql);
@@ -45,6 +47,6 @@ if($qty_on_hand >= $qty) {
     }
 }else{
     $error['is_error']=true;
-    $error['message']='Insufficient Inventory';
+    $error['error_message']='Insufficient Inventory';
     print_r(json_encode($error));
 }
