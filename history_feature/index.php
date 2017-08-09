@@ -5,7 +5,7 @@ if(isset($_SESSION['user_info'])){
     if($_SESSION['privileges']['admin'] || $_SESSION['privileges']['shipping']) {
         include '../components/header/header.php';
         include '../components/sidebar/sidebar.php';
-        $sql = "DELETE FROM `history` WHERE `timestamp` < (NOW() - INTERVAL 7 DAY)";
+        $sql = "DELETE FROM `history` WHERE `timestamp` < (NOW() - INTERVAL 30 DAY)";
         $result = mysqli_query($conn, $sql);
 
         function selectHistory($start_date, $end_date)
