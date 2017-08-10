@@ -7,16 +7,7 @@ $(document).ready(function(){
 });
 
 /**
- * Remove items from inventory based on user inputs
- */
-function ship_inventory(){
-    let upc = $('#upc').val();
-    let qty = $('#qty').val();
-    inventory_update(upc, qty);
-}
-
-/**
- * Restrict unwanted key presses in quantity input for Inventory Update feature
+ * Restrict unwanted key presses in quantity input for Shipping/Receiving feature
  */
 function restrictKeyPress(){
     $('#qty').keydown(function(e){
@@ -25,21 +16,41 @@ function restrictKeyPress(){
 }
 
 /**
+ * Remove items from inventory based on user inputs
+ */
+function ship_inventory(){
+    let upc = $('#upc').val();
+    let qty = $('#qty').val();
+    ship_receive(upc, qty);
+}
+
+/**
  * Add items to inventory based on user inputs
  */
 function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
-    inventory_update(upc, qty);
+    ship_receive(upc, qty);
+}
+
+function update_inventory(){
+    let upc = $('#upc').val();
+    let qty = $('#qty').val();
+    axios.post('../backend/update_inventory.php', {upc, qty}).then(resp=>{
+        $('#form_response').empty();
+        $('#form_response').append('<div>'+resp.data+'</div>')
+    });
+    $('#upc').val('').focus();
+    $('#qty').val('');
 }
 
 /**
- * Send the information to the server for updating inventory
+ * Send the information to the server for updating inventory from shipping and receiving feature
  * @param upc
  * @param qty
  */
-function inventory_update(upc, qty){
-    axios.post('../backend/update_inventory.php', {upc, qty}).then(resp=>{
+function ship_receive(upc, qty){
+    axios.post('../backend/ship_receive.php', {upc, qty}).then(resp=>{
         $('#response_message').remove();
         if(resp['data']['is_error']){
             let response_message = '<div id="response_message">'+resp['data']['error_message']+'</div>';
@@ -61,9 +72,7 @@ function inventory_update(upc, qty){
  * @param qty
  */
 function record_history(upc, qty){
-    axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
-    });
-
+    axios.post('../backend/record_history.php', {upc, qty});
 }
 /**
  * Get the information to display child products on inventory search page
@@ -179,6 +188,7 @@ function apply_click_handler(){
     $('#inventory_shipped').click(ship_inventory);
     $('#inventory_received').click(receive_inventory);
     $('.item_block').click(getChildProducts);
+    $('#inventory_update').click(update_inventory);
     $('#upc').blur(displayProduct);
 }
 
