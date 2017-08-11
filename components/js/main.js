@@ -105,7 +105,7 @@ function getChildProducts(){
             for (var i = 0; i < products.length; i++) {
                 var single_child = '<div class="child_number'+i+' single_child" upc="'+products[i].upc+'"></div>';
                 var color = '<div class="child_color">' + products[i].color + '</div>';
-                var image = products[i].thumbnail_location ? '<img src="../public/images/'+products[i].thumbnail_location+'">' : '<img src="https://iankbarry.files.wordpress.com/2015/05/91937cf37ba5d6727302ec24851b9a1ff46ae5cdaf1578b7bc7dc2c31a7746b5.jpg" height="150px">';
+                var image = products[i].thumbnail_location ? '<img src="../public/images/'+products[i].thumbnail_location+'">' : '<img src="../public/images/placeholder150-min.png" height="150px">';
                 var upc = '<div class="child_upc">UPC: ' + products[i].upc + '</div>';
                 var sku = '<div class="child_sku">SKU: ' + products[i].sku + '</div>';
                 var quantity = '<div class="child_quantity">Qty: ' + products[i].quantity + '</div>';
@@ -149,9 +149,13 @@ function displayProduct(){
                     '<img class="product_display_side" src="../public/images/' + products.side_img_location + '">' +
                     '</div>' +
                     '</div>';
-            }else{
+            }else if(products.front_img_location){
                 image = '<div class="product_display_all_images">' +
                     '<img class="product_display_front" src="../public/images/' + products.front_img_location + '">' +
+                    '</div>';
+            }else{
+                image = '<div class="product_display_all_images">' +
+                    '<img class="product_display_front" src="../public/images/placeholder150-min.png">' +
                     '</div>';
             }
             var description = '<div class="product_display_description_header">Description</div>' +
