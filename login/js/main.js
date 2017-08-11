@@ -12,6 +12,7 @@ function user_login(){
         if(resp.data.authorized === true){
             document.location.href = '../dashboard/index.php';
         }else{
+            $('.error_message').empty();
             var error = $('<div>',{
                 'class': 'error_text',
                 'text': 'username / password invalid'
