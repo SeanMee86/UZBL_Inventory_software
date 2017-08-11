@@ -202,10 +202,10 @@ function displayProduct(){
             $('.product_display').append(display_container);
             $('.product_display_container').append(title, image, errorMessage);
         }
+        if(!$(this).hasClass('selected') && $(this).hasClass('item_block')){
+            $('.product_display').children().remove();
+        }
     });
-    if(!$(this).hasClass('selected') && $(this).hasClass('item_block')){
-        $('.product_display').children().remove();
-    }
 }
 
 /**
