@@ -5,7 +5,7 @@ if(isset($_SESSION['user_info'])){
     if($_SESSION['privileges']['admin'] || $_SESSION['privileges']['shipping']) {
         include '../components/header/header.php';
         include '../components/sidebar/sidebar.php';
-        $sql = "DELETE FROM `history` WHERE `timestamp` < (NOW() - INTERVAL 30 DAY)";
+        $sql = "DELETE FROM `history` WHERE `timestamp` < (NOW() - INTERVAL 180 DAY)";
         $result = mysqli_query($conn, $sql);
 
         function selectHistory($start_date, $end_date)
@@ -37,20 +37,24 @@ if(isset($_SESSION['user_info'])){
                 echo "No History Data Found.<br>";
             }
         }
-
-        echo 'Today<hr>';
+        echo'<div class="history_labels labels_name">Name</div>
+             <div class="history_labels labels_time">Time</div>
+             <div class="history_labels labels_upc">UPC</div>
+             <div class="history_labels labels_qty_diff">Change</div>
+             <div class="history_labels labels_qty_curr">Current Count</div>';
+        echo '<div class="day_of_week current_day">Today<hr></div>';
         selectHistory(0,1);
-        echo date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y")))."<hr>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y")))."<hr></div>";
         selectHistory(-1,0);
-        echo date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-2, date("Y")))."<hr>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-2, date("Y")))."<hr></div>";
         selectHistory(-2,-1);
-        echo date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-3, date("Y")))."<hr>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-3, date("Y")))."<hr></div>";
         selectHistory(-3,-2);
-        echo date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-4, date("Y")))."<hr>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-4, date("Y")))."<hr></div>";
         selectHistory(-4,-3);
-        echo date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-5, date("Y")))."<hr>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-5, date("Y")))."<hr></div>";
         selectHistory(-5,-4);
-        echo date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-6, date("Y")))."<hr>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-6, date("Y")))."<hr></div>";
         selectHistory(-6,-5);
         include '../components/footer/footer.php';
     }else{

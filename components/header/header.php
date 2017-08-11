@@ -15,6 +15,7 @@
 </head>
 <body>
 <div class="header">
-    <a href="../logout/logout.php"><div class="btn btn-outline-info col-1 offset-10 log_out">Log Out</div></a>
+    <img class="header_logo " src="../public/images/uzbl_logo.png">
+    <a href="../logout/logout.php"><div class="btn btn-outline-info col-1 offset-9 log_out">Log Out</div></a>
 </div>
 
