@@ -2,21 +2,12 @@
  * Apply functionality after document has loaded
  */
 $(document).ready(function(){
-    apply_click_handler();
+    apply_event_handler();
     restrictKeyPress();
 });
 
 /**
- * Remove items from inventory based on user inputs
- */
-function ship_inventory(){
-    let upc = $('#upc').val();
-    let qty = $('#qty').val();
-    inventory_update(upc, qty);
-}
-
-/**
- * Restrict unwanted key presses in quantity input for Inventory Update feature
+ * Restrict unwanted key presses in quantity input for Shipping/Receiving feature
  */
 function restrictKeyPress(){
     $('#qty').keydown(function(e){
@@ -25,21 +16,59 @@ function restrictKeyPress(){
 }
 
 /**
+ * Remove items from inventory based on user inputs
+ */
+function ship_inventory(){
+    let upc = $('#upc').val();
+    let qty = $('#qty').val();
+    ship_receive(upc, qty);
+}
+
+/**
  * Add items to inventory based on user inputs
  */
 function receive_inventory(){
     let upc = $('#upc').val();
     let qty = -($('#qty').val());
-    inventory_update(upc, qty);
+    ship_receive(upc, qty);
 }
 
 /**
- * Send the information to the server for updating inventory
+ * Set the current on hand of a product to a specific amount
+ */
+function update_inventory(){
+    let upc = $('#upc').val();
+    let qty = $('#qty').val();
+    axios.post('../backend/update_inventory.php', {upc, qty}).then(resp=>{
+        $('#form_response').empty();
+        $('#form_response').append('<div id="response_message">'+resp.data+'</div>')
+    });
+    $('#upc').val('').focus();
+    $('#qty').val('');
+}
+
+/**
+ * Delete product from database
+ */
+function delete_product(){
+    let upc = $('#upc').val();
+    let confirm_delete = confirm('This will delete the product from the database entirely.  Are you sure you want to continue?');
+    if(confirm_delete === true){
+        axios.post('../backend/delete_product.php', {upc}).then(resp=>{
+            $('#form_response').empty();
+            $('#form_response').append('<div id="response_message">'+resp.data+'</div>')
+        });
+        $('#upc').val('').focus();
+    }
+}
+
+/**
+ * Send the information to the server for updating inventory from shipping and receiving feature
  * @param upc
  * @param qty
  */
-function inventory_update(upc, qty){
-    axios.post('../backend/update_inventory.php', {upc, qty}).then(resp=>{
+function ship_receive(upc, qty){
+    axios.post('../backend/ship_receive.php', {upc, qty}).then(resp=>{
         $('#response_message').remove();
         if(resp['data']['is_error']){
             let response_message = '<div id="response_message">'+resp['data']['error_message']+'</div>';
@@ -61,10 +90,9 @@ function inventory_update(upc, qty){
  * @param qty
  */
 function record_history(upc, qty){
-    axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
-    });
-
+    axios.post('../backend/record_history.php', {upc, qty});
 }
+
 /**
  * Get the information to display child products on inventory search page
  */
@@ -175,10 +203,12 @@ function displayProduct(){
 /**
  * Apply click handlers to buttons
  */
-function apply_click_handler(){
+function apply_event_handler(){
     $('#inventory_shipped').click(ship_inventory);
     $('#inventory_received').click(receive_inventory);
     $('.item_block').click(getChildProducts);
+    $('#inventory_update').click(update_inventory);
     $('#upc').blur(displayProduct);
+    $('#delete_product').click(delete_product);
 }
 
