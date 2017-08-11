@@ -42,19 +42,19 @@ if(isset($_SESSION['user_info'])){
              <div class="history_labels labels_upc">UPC</div>
              <div class="history_labels labels_qty_diff">Change</div>
              <div class="history_labels labels_qty_curr">Current Count</div>';
-        echo '<div class="day_of_week current_day">Today<hr></div>';
+        echo '<div class="day_of_week current_day">Today<div class="history_hr"></div></div>';
         selectHistory(0,1);
-        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y")))."<hr></div>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-1, date("Y"))).'<div class="history_hr"></div></div>';
         selectHistory(-1,0);
-        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-2, date("Y")))."<hr></div>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-2, date("Y"))).'<div class="history_hr"></div></div>';
         selectHistory(-2,-1);
-        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-3, date("Y")))."<hr></div>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-3, date("Y"))).'<div class="history_hr"></div></div>';
         selectHistory(-3,-2);
-        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-4, date("Y")))."<hr></div>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-4, date("Y"))).'<div class="history_hr"></div></div>';
         selectHistory(-4,-3);
-        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-5, date("Y")))."<hr></div>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-5, date("Y"))).'<div class="history_hr"></div></div>';
         selectHistory(-5,-4);
-        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-6, date("Y")))."<hr></div>";
+        echo '<div class="day_of_week">'.date('F jS, Y', mktime(0, 0, 0, date("m")  , date("d")-6, date("Y"))).'<div class="history_hr"></div></div>';
         selectHistory(-6,-5);
         include '../components/footer/footer.php';
     }else{
