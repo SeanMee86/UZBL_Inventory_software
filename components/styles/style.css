@@ -326,18 +326,27 @@ a {
     padding-right:var(--historyPadding);
 }
 
+/* Combined Top Labels and Product change information */
 .history_name, .history_time, .history_upc, .history_qty_diff, .history_qty_curr {
     padding-right:var(--historyPadding);
     display: inline-block;
     min-width:300px;
 }
 
-.history_time, .history_upc {
+.history_time, .history_upc, .labels_time, .labels_upc {
     min-width:180px;
+    display: inline-block;
 }
 
-.history_qty_diff, .history_qty_curr {
+.history_qty_diff, .history_qty_curr, .labels_qty_diff, .labels_qty_curr {
     min-width:110px;
+    display: inline-block;
+}
+
+/* Top Label */
+.labels_name {
+    display: inline-block; 
+    width:350px;
 }
 
 
