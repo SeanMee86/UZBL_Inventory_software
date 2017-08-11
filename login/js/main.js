@@ -24,4 +24,9 @@ function user_login(){
 
 function applyClickHandler(){
     $('#login_submit').click(user_login);
+    $('#password').keydown(function(e){
+        if(e.which === 13){
+            user_login();
+        }
+    })
 }
