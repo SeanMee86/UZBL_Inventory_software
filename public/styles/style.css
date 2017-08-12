@@ -368,7 +368,7 @@ a {
         .single_child.selected::after{
            width:30px;
            height:30px;
-           content: url("../../public/images/bluearrow-min.png");
+           content: url("../images/bluearrow-min.png");
            margin-left:23px;
            margin-top:20px;
            position:absolute;   

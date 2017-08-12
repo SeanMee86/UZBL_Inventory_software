@@ -99,6 +99,8 @@ function record_history(upc, qty){
 function getChildProducts(){
     var child_container = $(this).parent('.main_item_container').find('.child_container');
     if(child_container.find('div').length === 0) {
+        $('.child_container').empty();
+        $('.item_block').removeClass('selected');
         var upc = $(this).attr('upc');
         axios.post('../backend/retrieve_child_product.php', {upc}).then(resp => {
             var products = resp.data;
