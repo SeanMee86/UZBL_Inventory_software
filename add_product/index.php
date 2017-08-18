@@ -34,7 +34,7 @@ if(isset($_SESSION['user_info'])){
                 </div>
                 <div id="description_container">
                     <label for="product_description">Description</label>
-                    <textarea name="product_description" id="product_description" cols="30" rows="10"></textarea>
+                    <textarea name="product_description" id="product_description"></textarea>
                 </div>
                 <div id="pricing_container">
                     <div id="msrp_container">
