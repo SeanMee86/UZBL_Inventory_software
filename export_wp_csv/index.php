@@ -7,7 +7,7 @@ header('Content-Disposition: attachment; filename=data.csv');
 
 $output = fopen('php://output', 'w');
 
-fputcsv($output, array('UPC', 'Quantity'));
+fputcsv($output, array('_sku', '_stock'));
 
 $sql = "SELECT `upc`, `quantity` FROM `inventory`";
 
