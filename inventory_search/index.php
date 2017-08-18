@@ -23,6 +23,9 @@ if(isset($_SESSION['user_info'])){
             $sql .= " AND `tags` LIKE '%" . $search_terms[$i] . "%'";
         }
     }
+
+//    $sql .= " OR `upc`=".$_POST["search"]." ";
+
     $total_qty_sql = "SELECT SUM(`quantity`), `name`, `device_model` FROM `inventory` GROUP BY `device_model`, `name`";
 
     $total_qty_result = mysqli_query($conn, $total_qty_sql);
