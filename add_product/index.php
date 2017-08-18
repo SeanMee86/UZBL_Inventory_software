@@ -23,6 +23,8 @@ if(isset($_SESSION['user_info'])){
                 <div id="parent_upc_container">
                     <label for="parent_upc">Parent UPC(If Child Product)</label>
                     <input type="text" id="parent_upc" name="parent_upc">
+                    <input type="text" name="product_dev_model">
+                    <input type="text" name="product_color">
                 </div>
                 <div id="upc_container">
                     <label for="product_upc">UPC</label>
