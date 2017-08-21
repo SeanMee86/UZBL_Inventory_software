@@ -358,7 +358,16 @@ a {
 }
 
 
-/* ================================ ADD PRODUCT ================================ */ 
+/* ================================ ADD PRODUCT ================================ */
+
+#form_container {
+    display: none;
+}
+
+.required{
+    color: red;
+    font-size: 20px;
+}
 
 #form_container label, #images_container input {
     display:block;

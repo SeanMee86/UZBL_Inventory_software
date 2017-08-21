@@ -22,6 +22,8 @@ if(isset($_SESSION['user_info'])){
             $json_data = json_encode($data);
             echo $json_data;
         }
+    }else{
+        echo false;
     }
 }else{
     header('location: ../login');
