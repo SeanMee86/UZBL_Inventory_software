@@ -37,16 +37,12 @@ if($qty_on_hand >= $qty) {
         while ($select_row = mysqli_fetch_assoc($select_result)) {
             $select_data[] = $select_row;
         }
-        $item = $select_data[0]['name'];
-        $on_hand = $select_data[0]['quantity'];
-        $device = $select_data[0]['device_model'];
-        $color = $select_data[0]['color'];
-        echo 'inventory successfully updated, new On Hand for the ' . $item . ' for ' . $device . ' (' . $color . ')' . ' = ' . $on_hand;
+        echo json_encode($select_data);
     } else {
         echo 'inventory update failed: ' . mysqli_error($conn);
     }
 }else{
     $error['is_error']=true;
     $error['error_message']='Insufficient Inventory';
-    print_r(json_encode($error));
+    echo json_encode($error);
 }

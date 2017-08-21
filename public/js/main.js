@@ -75,8 +75,10 @@ function ship_receive(upc, qty){
             $('#form_response').append(response_message);
 
         }else {
-            let response_message = '<div id="response_message">' + resp['data'] + '</div>';
+            var data = resp.data[0];
+            let response_message = '<div id="response_message">inventory successfully updated, new On Hand for the ' + data['name'] + ' for ' + data['device_model'] + ' (' + data['color'] + ')' + ' = ' + data['quantity'] + '</div>';
             $('#form_response').append(response_message);
+            updateLive(data['quantity']);
             record_history(upc, qty);
         }
     });
@@ -126,6 +128,13 @@ function getChildProducts(){
 }
 
 /**
+ *
+ */
+function updateLive(qty){
+    $('.in_stock_amount').text(qty);
+}
+
+/**
  * Display Product in side container of inventory section
  */
 function displayProduct(){
@@ -136,6 +145,8 @@ function displayProduct(){
     }
     if($(this).attr('upc')){
         var upc = $(this).attr('upc');
+    }else if($('#product_upc').val()){
+        upc = $('#product_upc').val();
     }else{
         upc = $('#upc').val();
     }
@@ -165,7 +176,7 @@ function displayProduct(){
                 '<div class="product_display_description_body">' + products.description + '</div>';
             var product_upc = '<div class="product_display_upc">UPC: ' + products.upc + '</div>';
             var sku = '<div class="product_display_sku">SKU: ' + products.sku + '</div>';
-            var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span> <span class="in_stock_amount">' + products.quantity + '</span></div>';
+            var quantity = '<div class="product_display_quantity"><span class="in_stock">In Stock</span><span class="in_stock_amount">' + products.quantity + '</span></div>';
             var price_container = '<div class="product_price_container"></div>';
             var retail_price = '<div class="product_display_msrp">MSRP $' + products.retail_price + '</div>';
             var wholesale_table = '<div class="product_display_wholesale">' +
@@ -211,6 +222,59 @@ function displayProduct(){
 }
 
 /**
+ * Fills the inputs on the add/update product feature if the upc entered is found in the database,
+ * otherwise loads blank form for adding product.
+ */
+function fillUpdateInputs(){
+    var checkUpc = /^[0-9]{12}$/;
+
+    var upc = $('#product_upc').val();
+    if(checkUpc.test(upc)) {
+        $('.error_message').remove();
+        axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
+            if (resp.data) {
+                displayProduct();
+                $('#upc_container').css('display', 'none');
+                $('#form_container').css('display', 'block');
+                $('#product_name').val(resp.data[0]['name']);
+                $('#product_images').val(resp.data[0]['front_img_location']);
+                $('#product_side_image').val(resp.data[0]['side_img_location']);
+                $('#product_back_image').val(resp.data[0]['back_img_location']);
+                $('#product_thumbnail_image').val(resp.data[0]['thumbnail_location']);
+                $('#parent_upc').val(resp.data[0]['parent_item']);
+                $('#product_dev_model').val(resp.data[0]['device_model']);
+                $('#product_color').val(resp.data[0]['color']);
+                $('#product_sku').val(resp.data[0]['sku']);
+                $('#product_description').val(resp.data[0]['description']);
+                $('#product_msrp').val(resp.data[0]['retail_price']);
+                $('#product_tier1').val(resp.data[0]['tier1_1-50']);
+                $('#product_tier2').val(resp.data[0]['tier2_51-200']);
+                $('#product_tier3').val(resp.data[0]['tier3_201-349']);
+                $('#product_tier4').val(resp.data[0]['tier4_350-499']);
+                $('#product_tier5').val(resp.data[0]['tier5_500-999']);
+                $('#product_tier6').val(resp.data[0]['tier6_1000-2999']);
+                $('#product_tier7').val(resp.data[0]['tier7_3000-4999']);
+                $('#product_tier8').val(resp.data[0]['tier8_5000']);
+                $('#product_qty').val(resp.data[0]['quantity']);
+                $('#product_tags').val(resp.data[0]['tags']);
+                $('#add_product_btn input').val('Update Product');
+            } else {
+                $('#upc_container').css('display', 'none');
+                $('#form_container').css('display', 'block');
+                $('.product_display').remove();
+                $('.inventory_container').css({
+                    'max-width': '70vw',
+                });
+            }
+        })
+    }else{
+        console.log('not enough numbers');
+        $('.error_message').remove();
+        $('.inventory_container').append('<div class="error_message">Not a valid UPC d[^_^]b</div>');
+    }
+}
+
+/**
  * Apply click handlers to buttons
  */
 function apply_event_handler(){
@@ -221,5 +285,6 @@ function apply_event_handler(){
     $('#inventory_update').click(update_inventory);
     $('#upc').blur(displayProduct);
     $('#delete_product').click(delete_product);
+    $('#enter_upc').click(fillUpdateInputs);
 }
 

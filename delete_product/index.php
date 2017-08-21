@@ -6,6 +6,9 @@ if(isset($_SESSION['user_info'])){
         include '../components/header/header.php';
         include '../components/sidebar/sidebar.php';
         ?>
+        <div class="warning_message">
+            <p>Warning: This feature deletes the specified product permanently, this cannot be undone.</p>
+        </div>
         <form>
             <input id="upc" class="form-control col-6" autofocus="autofocus" type="text" name="upc" placeholder="Enter UPC">
             <br>
