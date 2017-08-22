@@ -2,27 +2,27 @@
 require 'mysql_conf.php';
 
 $upc = $_POST['product_upc'];
-$sku = !empty($_POST['product_sku']) ? $_POST['product_sku'] : '';
-$qty = !empty($_POST['current_qty']) ? $_POST['current_qty'] : 0;
-$dev_model = $_POST['product_dev_model'];
-$color = $_POST['product_color'];
-$name = $_POST['product_name'];
-$tags = !empty($_POST['product_tags']) ? $_POST['product_tags'] : '';
-$description = !empty($_POST['product_description']) ? $_POST['product_description'] : '';
-$msrp = $_POST['product_msrp'];
-$tier1 = !empty($_POST['tier1']) ? $_POST['tier1'] : 0.00;
-$tier2 = !empty($_POST['tier2']) ? $_POST['tier2'] : 0.00;
-$tier3 = !empty($_POST['tier3']) ? $_POST['tier3'] : 0.00;
-$tier4 = !empty($_POST['tier4']) ? $_POST['tier4'] : 0.00;
-$tier5 = !empty($_POST['tier5']) ? $_POST['tier5'] : 0.00;
-$tier6 = !empty($_POST['tier6']) ? $_POST['tier6'] : 0.00;
-$tier7 = !empty($_POST['tier7']) ? $_POST['tier7'] : 0.00;
-$tier8 = !empty($_POST['tier8']) ? $_POST['tier8'] : 0.00;
-$parent = !empty($_POST['parent_upc']) ? $_POST['parent_upc'] : 'NULL';
-$main_img = !empty($_POST['product_main_image']) ? $_POST['product_main_image'] : '';
-$back_img = !empty($_POST['product_back_image']) ? $_POST['product_back_image'] : '';
-$side_img = !empty($_POST['product_side_image']) ? $_POST['product_side_image'] : '';
-$thumbnail_img = !empty($_POST['product_thumbnail_image']) ? $_POST['product_thumbnail_image'] : '';
+$sku = !empty($_POST['product_sku']) ? mysqli_real_escape_string($conn, $_POST['product_sku']) : '';
+$qty = !empty($_POST['current_qty']) ? mysqli_real_escape_string($conn, $_POST['current_qty']) : 0;
+$dev_model = mysqli_real_escape_string($conn, $_POST['product_dev_model']);
+$color = mysqli_real_escape_string($conn, $_POST['product_color']);
+$name = mysqli_real_escape_string($conn, $_POST['product_name']);
+$tags = !empty($_POST['product_tags']) ? mysqli_real_escape_string($conn, $_POST['product_tags']) : '';
+$description = !empty($_POST['product_description']) ? mysqli_real_escape_string($conn, $_POST['product_description']) : '';
+$msrp = mysqli_real_escape_string($conn, $_POST['product_msrp']);
+$tier1 = !empty($_POST['tier1']) ? mysqli_real_escape_string($conn, $_POST['tier1']) : 0.00;
+$tier2 = !empty($_POST['tier2']) ? mysqli_real_escape_string($conn, $_POST['tier2']) : 0.00;
+$tier3 = !empty($_POST['tier3']) ? mysqli_real_escape_string($conn, $_POST['tier3']) : 0.00;
+$tier4 = !empty($_POST['tier4']) ? mysqli_real_escape_string($conn, $_POST['tier4']) : 0.00;
+$tier5 = !empty($_POST['tier5']) ? mysqli_real_escape_string($conn, $_POST['tier5']) : 0.00;
+$tier6 = !empty($_POST['tier6']) ? mysqli_real_escape_string($conn, $_POST['tier6']) : 0.00;
+$tier7 = !empty($_POST['tier7']) ? mysqli_real_escape_string($conn, $_POST['tier7']) : 0.00;
+$tier8 = !empty($_POST['tier8']) ? mysqli_real_escape_string($conn, $_POST['tier8']) : 0.00;
+$parent = !empty($_POST['parent_upc']) ? mysqli_real_escape_string($conn, $_POST['parent_upc']) : 'NULL';
+$main_img = !empty($_POST['product_main_image']) ? mysqli_real_escape_string($conn, $_POST['product_main_image']) : '';
+$back_img = !empty($_POST['product_back_image']) ? mysqli_real_escape_string($conn, $_POST['product_back_image']) : '';
+$side_img = !empty($_POST['product_side_image']) ? mysqli_real_escape_string($conn, $_POST['product_side_image']) : '';
+$thumbnail_img = !empty($_POST['product_thumbnail_image']) ? mysqli_real_escape_string($conn, $_POST['product_thumbnail_image']) : '';
 
 $sql="SELECT `upc` FROM `inventory` WHERE `upc`=$upc";
 
@@ -36,6 +36,15 @@ if(mysqli_num_rows($result) == 0) {
     $result = mysqli_query($conn, $sql);
 
 
+    echo'<pre>';
+    echo $result;
+    echo'</pre>';
+    echo'<br>';
+    echo $sql;
+    echo'<hr>';
+    echo mysqli_error($conn);
+
+
 }else{
 
     $sql = "UPDATE `inventory` SET `sku`='$sku',`quantity`=$qty,`device_model`='$dev_model',
@@ -46,6 +55,9 @@ if(mysqli_num_rows($result) == 0) {
     `back_img_location`='$back_img',`side_img_location`='$side_img' WHERE `upc`=$upc";
 
     $result = mysqli_query($conn, $sql);
+
+
+
 
 }
 header('location: http://localhost/bizurk_prototype/add_product/index.php');
