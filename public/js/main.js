@@ -92,7 +92,33 @@ function ship_receive(upc, qty){
  * @param qty
  */
 function record_history(upc, qty){
-    axios.post('../backend/record_history.php', {upc, qty});
+    axios.post('../backend/record_history.php', {upc, qty}).then(resp=>{
+        var history_data = resp.data[0].history_data;
+        var history_id = history_data[history_data.length-1].history_id;
+        var qty_difference = -qty;
+        var name_of_product = resp.data[0].name;
+        var undo_button = '<input class="undo_ship_receive" type="button" value="Undo">';
+        var history_container = '<div class="history_container"></div>';
+        if($('.history_container').length === 0) $('.inventory_container').append(history_container);
+        $('.history_container').append('<div class="st_history">' + '<span class="history_id" style="display: none">'+history_id+'</span>' + '<span class="undo_upc">' + upc + '</span>' + ' ' + (qty_difference>0 ? '+' : '') + '<span class="undo_quantity">' + qty_difference + '</span>' + ' ' + name_of_product + ' ' + undo_button + '</div>');
+        $('.undo_ship_receive').unbind('click').click(undo_history);
+    });
+}
+
+function delete_history(id){
+    axios.post('../backend/delete_history.php', {id})
+}
+
+function undo_history(upc, qty, id){
+    upc = parseInt($(this).parent().find('.undo_upc').text());
+    qty = parseInt($(this).parent().find('.undo_quantity').text());
+    id = parseInt($(this).parent().find('.history_id').text());
+    axios.post('../backend/ship_receive.php', {upc, qty}).then(resp=>{
+        $('#response_message').remove();
+        $(this).parent().remove();
+        delete_history(id);
+    });
+
 }
 
 /**
@@ -268,7 +294,6 @@ function fillUpdateInputs(){
             }
         })
     }else{
-        console.log('not enough numbers');
         $('.error_message').remove();
         $('.inventory_container').append('<div class="error_message">Not a valid UPC d[^_^]b</div>');
     }

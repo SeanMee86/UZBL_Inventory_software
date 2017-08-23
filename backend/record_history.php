@@ -23,8 +23,14 @@ if(isset($_SESSION['user_info'])){
         $sql = "INSERT INTO `history`(`upc`, `name`, `device_model`, `color`, `thumbnail_location`, `qty_difference`, `qty_current`)
         VALUES ($upc, '$name', '$device_model', '$color', '$thumbnail', $qty_diff, $qty_current)";
         $result = mysqli_query($conn, $sql);
+        $history_sql = "SELECT `history_id` FROM `history`";
+        $history_result = mysqli_query($conn, $history_sql);
+        while($row = mysqli_fetch_assoc($history_result)){
+            $history_data[] = $row;
+        }
+        $data[0]['history_data'] = $history_data;
         if ($result) {
-            echo $qty . ' ' . $qty_current;
+            echo json_encode($data);
         } else {
             echo "history not recorded: " . mysqli_error($conn);
         }
