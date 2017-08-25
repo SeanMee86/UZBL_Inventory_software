@@ -17,10 +17,10 @@
                 $url === $base_url."spread_sheet/index.php")){
             ?>
                 <li class="sidebar_sub"><a href="../spread_sheet/index.php">Spread Sheet View</a></li>
+                <li class="sidebar_sub"><a href="../history_feature/index.php">History</a></li>
                 <?php
                     if($privileges['admin'] || $privileges['shipping']){
                 ?>
-                    <li class="sidebar_sub"><a href="../history_feature/index.php">History</a></li>
                     <li class="sidebar_sub"><a href="../ship_receive/index.php">Shipping/Receiving</a></li>
                     <li class="sidebar_sub"><a href="../delete_product/index.php">Delete Product</a></li>
                     <li class="sidebar_sub"><a href="../add_product/index.php">Add/Update Product</a></li>

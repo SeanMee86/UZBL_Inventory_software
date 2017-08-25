@@ -77,16 +77,16 @@ function record_history(upc, qty){
         const history_data = resp.data[0].history_data;
         const history_id = history_data[history_data.length-1].history_id;
         const qty_difference = -qty;
-        const name_of_product = resp.data[0].name;
+        const name_of_product = resp.data[0].name + ' for ' + resp.data[0].device_model + '(' + resp.data[0].color + ')';
         const undo_button = '<input class="undo_ship_receive" type="button" value="Undo">';
         const history_container = '<div class="history_container"></div>';
         if($('.history_container').length === 0) $('.inventory_container').append(history_container);
         $('.history_container').prepend(
             '<div class="st_history">' +
             '<span class="history_id" style="display: none">'+history_id+'</span>' +
-            '<span class="undo_upc">' + upc + '</span>' +
+            '<span class="undo_product_name">'+ name_of_product + '</span>' +
+            ' ' + '<span class="undo_upc">' + upc + '</span>' +
             ' ' + '<span class="undo_quantity">' + (qty_difference>0 ? '+' : '') + qty_difference + '</span>' +
-            ' ' + '<span class="undo_product_name">'+ name_of_product + '</span>'+
             ' ' + undo_button +
             '</div>'
         );
