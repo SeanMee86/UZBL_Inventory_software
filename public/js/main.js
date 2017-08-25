@@ -81,7 +81,7 @@ function record_history(upc, qty){
         const undo_button = '<input class="undo_ship_receive" type="button" value="Undo">';
         const history_container = '<div class="history_container"></div>';
         if($('.history_container').length === 0) $('.inventory_container').append(history_container);
-        $('.history_container').append(
+        $('.history_container').prepend(
             '<div class="st_history">' +
             '<span class="history_id" style="display: none">'+history_id+'</span>' +
             '<span class="undo_upc">' + upc + '</span>' +
