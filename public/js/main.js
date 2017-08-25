@@ -87,7 +87,7 @@ function record_history(upc, qty){
             '<span class="undo_upc">' + upc + '</span>' +
             ' ' + '<span class="undo_quantity">' + (qty_difference>0 ? '+' : '') + qty_difference + '</span>' +
             ' ' + '<span class="undo_product_name">'+ name_of_product + '</span>'+
-            ' ' + '<span class="undo_btn">' + undo_button + '</span>' +
+            ' ' + undo_button +
             '</div>'
         );
         $('.undo_ship_receive').unbind('click').click(undo_history);
@@ -177,7 +177,7 @@ function callAxiosForDisplay(upc){
             $('.product_display').append(display_container);
             $('.product_display_container').append(title, image, errorMessage);
         }
-        if(!$(this).hasClass('selected') && $(this).hasClass('item_block')){
+        if($('.item_block').length>0 && !$('.item_block').hasClass('selected')){
             $('.product_display').children().remove();
         }
     });
@@ -194,6 +194,7 @@ function displayProductFromChild(){
     }
     const upc = $(this).attr('upc');
     callAxiosForDisplay(upc);
+
 }
 
 /**
