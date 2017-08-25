@@ -36,14 +36,6 @@ if(mysqli_num_rows($result) == 0) {
     $result = mysqli_query($conn, $sql);
 
 
-    echo'<pre>';
-    echo $result;
-    echo'</pre>';
-    echo'<br>';
-    echo $sql;
-    echo'<hr>';
-    echo mysqli_error($conn);
-
 
 }else{
 
@@ -55,9 +47,6 @@ if(mysqli_num_rows($result) == 0) {
     `back_img_location`='$back_img',`side_img_location`='$side_img' WHERE `upc`=$upc";
 
     $result = mysqli_query($conn, $sql);
-
-
-
 
 }
 header('location: http://localhost/bizurk_prototype/add_product/index.php');
