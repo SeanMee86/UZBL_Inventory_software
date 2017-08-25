@@ -49,4 +49,4 @@ if(mysqli_num_rows($result) == 0) {
     $result = mysqli_query($conn, $sql);
 
 }
-header('location: http://localhost/bizurk_prototype/add_product/index.php');
+header('location: ../add_product/index.php');
