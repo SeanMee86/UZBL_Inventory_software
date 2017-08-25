@@ -23,7 +23,7 @@ function restrictKeyPress(){
 function ship_inventory(){
     const upc = $('#upc').val();
     const qty = $('#qty').val();
-    ship_receive(upc, qty);
+    update_inventory(upc, qty);
 }
 
 /**
@@ -32,7 +32,7 @@ function ship_inventory(){
 function receive_inventory(){
     const upc = $('#upc').val();
     const qty = -($('#qty').val());
-    ship_receive(upc, qty);
+    update_inventory(upc, qty);
 }
 
 /**
@@ -40,7 +40,7 @@ function receive_inventory(){
  * @param upc
  * @param qty
  */
-function ship_receive(upc, qty){
+function update_inventory(upc, qty){
     axios.post('../backend/ship_receive.php', {upc, qty}).then(resp=>{
         $('#response_message').remove();
         let response_message;
