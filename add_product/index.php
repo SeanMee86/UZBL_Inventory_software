@@ -1,6 +1,47 @@
 <?php
 session_start();
 require"../backend/mysql_conf.php";
+
+//$model_sql = "SELECT `device_model` FROM `inventory` GROUP BY `device_model`";
+//
+//$model_result = mysqli_query($conn, $model_sql);
+//
+//while($model_row = mysqli_fetch_assoc($model_result)){
+//    $model_data[] = $model_row;
+//}
+//$color_sql = "SELECT `color` FROM `inventory` GROUP BY `color`";
+//
+//$color_result = mysqli_query($conn, $color_sql);
+//
+//while($color_row = mysqli_fetch_assoc($color_result)){
+//    $color_data[] = $color_row;
+//}
+
+function sqlFetch($column){
+    global $conn;
+    $sql = "SELECT `$column` FROM `inventory` GROUP BY `$column`";
+
+    $result = mysqli_query($conn, $sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+        $data[] = $row;
+    }
+    return $data;
+}
+
+function dropDownItems($val, $selected, $data)
+{
+    foreach ($data as $key => $value) {
+        $option = '<option value="' . $value[$val] . '">' . $value[$val] . '</option>';
+        $default_option = '<option value="' . $value[$val] . '" selected>' . $value[$val] . '</option>';
+        if ($value[$val] === $selected) {
+            echo $default_option;
+        } else {
+            echo $option;
+        }
+    }
+}
+
 if(isset($_SESSION['user_info'])){
     if($_SESSION['privileges']['admin'] || $_SESSION['privileges']['shipping']) {
         include '../components/header/header.php';
@@ -16,8 +57,11 @@ if(isset($_SESSION['user_info'])){
                 </div>
                 <div id="form_container">
                     <div id="name_container">
-                        <label for="product_name">Product Name</label>
-                        <input type="text" id="product_name" name="product_name" placeholder="Enter Name" required><span class="required">*</span>
+                        <select name="product_dev_model">
+                            <?php
+                            dropDownItems('name', 'ShockWave', sqlFetch('name'));
+                            ?>
+                        </select>
                     </div>
                     <div id="images_container">
                         <label for="product_images">Images</label>
@@ -29,8 +73,18 @@ if(isset($_SESSION['user_info'])){
                     <div id="parent_upc_container">
                         <label for="parent_upc">Parent UPC(If Child Product)</label>
                         <input type="text" id="parent_upc" placeholder="Enter Parent UPC" name="parent_upc">
-                        <input type="text" id="product_dev_model" placeholder="Enter Device Model" name="product_dev_model" required><span class="required">*</span>
-                        <input type="text" id="product_color" placeholder="Enter Color" name="product_color">
+                        <!--                        <input type="text" id="product_dev_model" placeholder="Enter Device Model" name="product_dev_model" required><span class="required">*</span>-->
+                        <select name="product_dev_model">
+                        <?php
+                            dropDownItems('device_model', '2017 iPad 9.7', sqlFetch('device_model'));
+                        ?>
+                        </select>
+<!--                        <input type="text" id="product_color" placeholder="Enter Color" name="product_color">-->
+                        <select name="product_color">
+                            <?php
+                            dropDownItems('color', 'Black', sqlFetch('color'));
+                            ?>
+                        </select>
                     </div>
                     <div id="sku_container">
                         <label for="product_sku">SKU</label>
