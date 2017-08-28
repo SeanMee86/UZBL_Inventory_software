@@ -57,7 +57,7 @@ if(isset($_SESSION['user_info'])){
                 </div>
                 <div id="form_container">
                     <div id="name_container">
-                        <select name="product_dev_model">
+                        <select name="product_name">
                             <?php
                             dropDownItems('name', 'ShockWave', sqlFetch('name'));
                             ?>
