@@ -301,17 +301,21 @@ function fillUpdateInputs(){
         $('.error_message').remove();
         axios.post('../backend/retrieve_product_for_display.php', {upc}).then(resp => {
             if (resp.data) {
+                const color = resp.data[0].color;
+                const name = resp.data[0].name;
+                const dev_model = resp.data[0]['device_model'];
+                console.log(typeof color + ' ' + color);
                 displayProductFromInput();
                 $('#upc_container').css('display', 'none');
                 $('#form_container').css('display', 'block');
-                $('#product_name').val(resp.data[0]['name']);
+                $('#product_name option').removeAttr('selected').filter('[value="'+name+'"]').attr('selected', true);
                 $('#product_images').val(resp.data[0]['front_img_location']);
                 $('#product_side_image').val(resp.data[0]['side_img_location']);
                 $('#product_back_image').val(resp.data[0]['back_img_location']);
                 $('#product_thumbnail_image').val(resp.data[0]['thumbnail_location']);
                 $('#parent_upc').val(resp.data[0]['parent_item']);
-                $('#product_dev_model').val(resp.data[0]['device_model']);
-                $('#product_color').val(resp.data[0]['color']);
+                $('#product_dev_model option').removeAttr('selected').filter('[value="'+dev_model+'"]').attr('selected', true);
+                $('#product_color option').removeAttr('selected').filter('[value="'+color+'"]').attr('selected', true);
                 $('#product_sku').val(resp.data[0]['sku']);
                 $('#product_description').val(resp.data[0]['description']);
                 $('#product_msrp').val(resp.data[0]['retail_price']);

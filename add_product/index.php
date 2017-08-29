@@ -57,7 +57,7 @@ if(isset($_SESSION['user_info'])){
                 </div>
                 <div id="form_container">
                     <div id="name_container">
-                        <select name="product_name">
+                        <select id="product_name" name="product_name">
                             <?php
                             dropDownItems('name', 'ShockWave', sqlFetch('name'));
                             ?>
@@ -74,13 +74,13 @@ if(isset($_SESSION['user_info'])){
                         <label for="parent_upc">Parent UPC(If Child Product)</label>
                         <input type="text" id="parent_upc" placeholder="Enter Parent UPC" name="parent_upc">
                         <!--                        <input type="text" id="product_dev_model" placeholder="Enter Device Model" name="product_dev_model" required><span class="required">*</span>-->
-                        <select name="product_dev_model">
+                        <select id="product_dev_model" name="product_dev_model">
                         <?php
                             dropDownItems('device_model', '2017 iPad 9.7', sqlFetch('device_model'));
                         ?>
                         </select>
 <!--                        <input type="text" id="product_color" placeholder="Enter Color" name="product_color">-->
-                        <select name="product_color">
+                        <select id="product_color" name="product_color">
                             <?php
                             dropDownItems('color', 'Black', sqlFetch('color'));
                             ?>
