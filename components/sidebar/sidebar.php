@@ -16,6 +16,7 @@
                 $url === $base_url."delete_product/index.php" ||
                 $url === $base_url."spread_sheet/index.php")){
             ?>
+                <li class="sidebar_sub"><a href="../inventory_main/index.php">Inventory Search</a></li>
                 <li class="sidebar_sub"><a href="../spread_sheet/index.php">Spread Sheet View</a></li>
                 <li class="sidebar_sub"><a href="../history_feature/index.php">History</a></li>
                 <?php

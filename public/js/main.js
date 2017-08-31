@@ -304,7 +304,6 @@ function fillUpdateInputs(){
                 const color = resp.data[0].color;
                 const name = resp.data[0].name;
                 const dev_model = resp.data[0]['device_model'];
-                console.log(typeof color + ' ' + color);
                 displayProductFromInput();
                 $('#upc_container').css('display', 'none');
                 $('#form_container').css('display', 'block');
@@ -314,7 +313,7 @@ function fillUpdateInputs(){
                 $('#product_back_image').val(resp.data[0]['back_img_location']);
                 $('#product_thumbnail_image').val(resp.data[0]['thumbnail_location']);
                 $('#parent_upc').val(resp.data[0]['parent_item']);
-                $('#product_dev_model option').removeAttr('selected').filter('[value="'+dev_model+'"]').attr('selected', true);
+                $('#product_dev_model option').removeAttr('selected').filter("[value='"+dev_model+"']").attr('selected', true);
                 $('#product_color option').removeAttr('selected').filter('[value="'+color+'"]').attr('selected', true);
                 $('#product_sku').val(resp.data[0]['sku']);
                 $('#product_description').val(resp.data[0]['description']);

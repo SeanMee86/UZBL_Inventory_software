@@ -2,20 +2,6 @@
 session_start();
 require"../backend/mysql_conf.php";
 
-//$model_sql = "SELECT `device_model` FROM `inventory` GROUP BY `device_model`";
-//
-//$model_result = mysqli_query($conn, $model_sql);
-//
-//while($model_row = mysqli_fetch_assoc($model_result)){
-//    $model_data[] = $model_row;
-//}
-//$color_sql = "SELECT `color` FROM `inventory` GROUP BY `color`";
-//
-//$color_result = mysqli_query($conn, $color_sql);
-//
-//while($color_row = mysqli_fetch_assoc($color_result)){
-//    $color_data[] = $color_row;
-//}
 
 function sqlFetch($column){
     global $conn;
@@ -32,8 +18,8 @@ function sqlFetch($column){
 function dropDownItems($val, $selected, $data)
 {
     foreach ($data as $key => $value) {
-        $option = '<option value="' . $value[$val] . '">' . $value[$val] . '</option>';
-        $default_option = '<option value="' . $value[$val] . '" selected>' . $value[$val] . '</option>';
+        $option = "<option value='" . $value[$val] . "'>" . $value[$val] . '</option>';
+        $default_option = "<option value='" . $value[$val] . "' selected>" . $value[$val] . '</option>';
         if ($value[$val] === $selected) {
             echo $default_option;
         } else {
@@ -79,7 +65,6 @@ if(isset($_SESSION['user_info'])){
                             dropDownItems('device_model', '2017 iPad 9.7', sqlFetch('device_model'));
                         ?>
                         </select>
-<!--                        <input type="text" id="product_color" placeholder="Enter Color" name="product_color">-->
                         <select id="product_color" name="product_color">
                             <?php
                             dropDownItems('color', 'Black', sqlFetch('color'));
