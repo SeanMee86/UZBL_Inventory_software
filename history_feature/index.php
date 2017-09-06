@@ -8,6 +8,7 @@ if(isset($_SESSION['user_info'])){
     $sql = "DELETE FROM `history` WHERE `timestamp` < (NOW() - INTERVAL 180 DAY)";
     $result = mysqli_query($conn, $sql);
     if(!isset($_POST['submit'])) {
+        
         function selectHistory($start_date, $end_date)
         {
             global $conn;
@@ -20,7 +21,13 @@ if(isset($_SESSION['user_info'])){
                 while ($row = mysqli_fetch_assoc($result)) {
                     $data[] = $row;
                 }
+                if($start_date == 0){
+                    echo '<div class="day_of_week">Today</div>';
+                }else {
+                    echo '<div class="day_of_week">' . date('F jS, Y', mktime(0, 0, 0, date("m"), date("d") + ($start_date), date("Y"))) . '<div class="history_hr"></div></div>';
+                }
                 foreach ($data as $key => $value) {
+
                     if ($value['qty_difference'] > 0) {
                         $value['qty_difference'] = '+' . $value['qty_difference'];
                     }
@@ -38,12 +45,12 @@ if(isset($_SESSION['user_info'])){
                     echo '<br>';
                 }
                 echo '<br>';
-            } else {
-                echo 'No History Data Found';
             }
         }
     }else{
+
         $upc = $_POST['upc'];
+
         function selectHistory($start_date, $end_date)
         {
             global $upc;
@@ -54,11 +61,15 @@ if(isset($_SESSION['user_info'])){
                 AND `upc`=$upc
                 ORDER BY `timestamp` DESC";
             $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) > 0) {
+            if ($result && mysqli_num_rows($result)>0) {
                 while ($row = mysqli_fetch_assoc($result)) {
                     $data[] = $row;
                 }
-                foreach ($data as $key => $value) {
+                if($start_date == 0){
+                    echo '<div class="day_of_week">Today</div>';
+                }else {
+                    echo '<div class="day_of_week">' . date('F jS, Y', mktime(0, 0, 0, date("m"), date("d") + ($start_date), date("Y"))) . '<div class="history_hr"></div></div>';
+                }                foreach ($data as $key => $value) {
                     if ($value['qty_difference'] > 0) {
                         $value['qty_difference'] = '+' . $value['qty_difference'];
                     }
@@ -76,8 +87,6 @@ if(isset($_SESSION['user_info'])){
                     echo '<br>';
                 }
                 echo '<br>';
-            } else {
-                echo 'No History Data Found';
             }
         }
     }
@@ -96,15 +105,12 @@ if(isset($_SESSION['user_info'])){
          <div class="history_labels labels_upc">UPC</div>
          <div class="history_labels labels_qty_diff">Change</div>
          <div class="history_labels labels_qty_curr">Current Count</div>';
-    echo '<div class="day_of_week current_day">Today<div class="history_hr"></div></div>';
-    for($i=0; $i>-30;$i--){
-        if ($i === 0) {
-            selectHistory($i, $i + 1);
-        } else {
-            echo '<div class="day_of_week">' . date('F jS, Y', mktime(0, 0, 0, date("m"), date("d") + ($i - 1), date("Y"))) . '<div class="history_hr"></div></div>';
-            selectHistory($i, $i + 1);
-        }
+
+    for($i=0; $i>-30;$i--)
+    {
+        selectHistory($i, $i + 1);
     }
+
     include '../components/footer/footer.php';
 
 }else{
